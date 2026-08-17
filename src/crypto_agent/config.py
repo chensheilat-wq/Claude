@@ -106,7 +106,7 @@ def load_config() -> Config:
         rsi_period=_get_int("RSI_PERIOD", 14),
         rsi_oversold=_get_float("RSI_OVERSOLD", 30),
         rsi_overbought=_get_float("RSI_OVERBOUGHT", 70),
-        sma_period=_get_int("SMA_PERIOD", 50),
+        sma_period=_get_int("SMA_PERIOD", 20),
         max_position_pct=_get_float("MAX_POSITION_PCT", 0.20),
         stop_loss_pct=_get_float("STOP_LOSS_PCT", 0.015),
         trailing_activation_pct=_get_float("TRAILING_ACTIVATION_PCT", 0.02),

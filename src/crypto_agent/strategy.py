@@ -43,7 +43,7 @@ class RsiTrendStrategy:
         rsi_period: int = 14,
         rsi_oversold: float = 30,
         rsi_overbought: float = 70,
-        sma_period: int = 50,
+        sma_period: int = 20,
     ):
         self.rsi_period = rsi_period
         self.rsi_oversold = rsi_oversold

@@ -21,7 +21,7 @@ def main():
     parser.add_argument("--days", type=int, default=90)
     parser.add_argument("--rsi-period", type=int, default=14)
     parser.add_argument("--rsi-oversold", type=float, default=30)
-    parser.add_argument("--sma-period", type=int, default=50)
+    parser.add_argument("--sma-period", type=int, default=20)
     args = parser.parse_args()
 
     print(f"Fetching {args.days} days of {args.interval} candles for {args.symbol}...")
