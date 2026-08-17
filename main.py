@@ -51,6 +51,7 @@ def main() -> int:
         rsi_oversold=config.rsi_oversold,
         rsi_overbought=config.rsi_overbought,
         sma_period=config.sma_period,
+        trend_tolerance_pct=config.trend_tolerance_pct,
     )
     risk_manager = RiskManager(
         max_position_pct=config.max_position_pct,

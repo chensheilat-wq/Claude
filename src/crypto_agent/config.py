@@ -41,6 +41,7 @@ class Config:
     rsi_oversold: float
     rsi_overbought: float
     sma_period: int
+    trend_tolerance_pct: float
 
     max_position_pct: float
     stop_loss_pct: float
@@ -67,6 +68,8 @@ class Config:
             problems.append("MIN_24H_QUOTE_VOLUME cannot be negative.")
         if self.max_candidates <= 0:
             problems.append("MAX_CANDIDATES must be positive.")
+        if not (0 <= self.trend_tolerance_pct < 1):
+            problems.append("TREND_TOLERANCE_PCT must be between 0 and 1.")
         if not (0 < self.max_position_pct <= 1):
             problems.append("MAX_POSITION_PCT must be between 0 and 1.")
         if not (0 < self.stop_loss_pct < 1):
@@ -107,6 +110,7 @@ def load_config() -> Config:
         rsi_oversold=_get_float("RSI_OVERSOLD", 30),
         rsi_overbought=_get_float("RSI_OVERBOUGHT", 70),
         sma_period=_get_int("SMA_PERIOD", 20),
+        trend_tolerance_pct=_get_float("TREND_TOLERANCE_PCT", 0.02),
         max_position_pct=_get_float("MAX_POSITION_PCT", 0.20),
         stop_loss_pct=_get_float("STOP_LOSS_PCT", 0.015),
         trailing_activation_pct=_get_float("TRAILING_ACTIVATION_PCT", 0.02),

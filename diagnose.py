@@ -45,24 +45,34 @@ def main():
     print(f"Total usable candles:              {len(rsi_v)}")
     print(f"RSI range:                         {rsi_v.min():.1f} - {rsi_v.max():.1f}")
     print(f"Candles with RSI < {args.rsi_oversold:.0f} (oversold):        {oversold_mask.sum()}")
-    print(f"Candles with price > SMA{args.sma_period} (uptrend):    {above_sma_mask.sum()}")
-    print(f"Candles meeting BOTH (= entry signal): {entry_mask.sum()}")
+    print(f"Candles with price > SMA{args.sma_period} (strictly, no tolerance): {above_sma_mask.sum()}")
+    print(f"Candles meeting BOTH (= entry signal, 0% tolerance): {entry_mask.sum()}")
     print("=" * 60)
 
     if entry_mask.sum() > 0:
-        print("\nEntry signals would have fired at:")
+        print("\nEntry signals would have fired at (0% tolerance):")
         for t, p, r in zip(time_v[entry_mask], price_v[entry_mask], rsi_v[entry_mask]):
             print(f"  {t}  price={p:.2f}  rsi={r:.1f}")
-    elif oversold_mask.sum() > 0:
-        print("\nRSI DID go oversold, but never while price was above the SMA (i.e. every")
-        print("dip happened during a downtrend, not a pullback within an uptrend).")
-        print("Closest near-misses (oversold candles, showing price vs SMA at that moment):")
-        near = rsi_v[oversold_mask].sort_values().head(5)
-        for idx in near.index:
-            print(f"  {time_v[idx]}  price={price_v[idx]:.2f}  sma={sma_v[idx]:.2f}  rsi={rsi_v[idx]:.1f}")
-    else:
+        return
+
+    if oversold_mask.sum() == 0:
         print("\nRSI never went below the oversold threshold at all in this window.")
         print(f"Lowest RSI reached: {rsi_v.min():.1f} at {time_v[rsi_v.idxmin()]}")
+        return
+
+    print("\nRSI DID go oversold, but never while price was strictly above the SMA (i.e.")
+    print("every dip happened during a downtrend, not a pullback within an uptrend).")
+    print("Closest near-misses (oversold candles, showing price vs SMA at that moment):")
+    near = rsi_v[oversold_mask].sort_values().head(5)
+    for idx in near.index:
+        print(f"  {time_v[idx]}  price={price_v[idx]:.2f}  sma={sma_v[idx]:.2f}  rsi={rsi_v[idx]:.1f}")
+
+    print("\nHow many entry signals a TREND_TOLERANCE_PCT would have allowed:")
+    print(f"{'tolerance':>10} | {'entry signals':>13}")
+    for tol in (0.0, 0.005, 0.01, 0.02, 0.03, 0.05, 0.08):
+        trend_floor = sma_v * (1 - tol)
+        count = int((oversold_mask & (price_v > trend_floor)).sum())
+        print(f"{tol:>9.1%} | {count:>13}")
 
 
 if __name__ == "__main__":
