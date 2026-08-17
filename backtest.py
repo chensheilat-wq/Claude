@@ -14,8 +14,33 @@ from datetime import timedelta
 import pandas as pd
 from binance.client import Client
 
+from src.crypto_agent.breakout_strategy import DonchianBreakoutStrategy
 from src.crypto_agent.risk_manager import RiskManager
 from src.crypto_agent.strategy import RsiTrendStrategy, Signal
+
+# Each strategy family gets its own sane starting risk parameters - a 6-hour
+# time-limit or a 1.5% stop-loss tuned for 15m mean-reversion would choke a
+# multi-day trend-following trade before it ever develops.
+STRATEGY_PRESETS = {
+    "rsi_meanrev": {
+        "make_strategy": lambda: RsiTrendStrategy(),
+        "risk_kwargs": dict(
+            max_position_pct=0.20, stop_loss_pct=0.015,
+            trailing_activation_pct=0.02, trailing_distance_pct=0.015,
+            max_hold_hours=6, crash_drop_pct=0.07, crash_window_minutes=60,
+            max_daily_loss_pct=0.05, max_trades_per_day=6,
+        ),
+    },
+    "breakout": {
+        "make_strategy": lambda: DonchianBreakoutStrategy(),
+        "risk_kwargs": dict(
+            max_position_pct=0.20, stop_loss_pct=0.05,
+            trailing_activation_pct=0.06, trailing_distance_pct=0.04,
+            max_hold_hours=72, crash_drop_pct=0.10, crash_window_minutes=240,
+            max_daily_loss_pct=0.08, max_trades_per_day=4,
+        ),
+    },
+}
 
 
 def fetch_history(symbol: str, interval: str, days: int) -> pd.DataFrame:
@@ -47,6 +72,8 @@ def categorize_exit_reason(reason: str) -> str:
         return "time-limit"
     if "RSI" in reason:
         return "RSI-overbought-signal"
+    if "Trend reversal" in reason:
+        return "trend-reversal-signal"
     return "other"
 
 
@@ -58,19 +85,15 @@ def _price_before_crash_window(df_window: pd.DataFrame, now, crash_window_minute
     return float(candidates["close"].iloc[-1])
 
 
-def run_backtest(df: pd.DataFrame, starting_balance: float, fee_pct: float = 0.001) -> dict:
-    strategy = RsiTrendStrategy()
-    risk = RiskManager(
-        max_position_pct=0.20,
-        stop_loss_pct=0.015,
-        trailing_activation_pct=0.02,
-        trailing_distance_pct=0.015,
-        max_hold_hours=6,
-        crash_drop_pct=0.07,
-        crash_window_minutes=60,
-        max_daily_loss_pct=0.05,
-        max_trades_per_day=6,
-    )
+def run_backtest(
+    df: pd.DataFrame,
+    starting_balance: float,
+    fee_pct: float = 0.001,
+    strategy_name: str = "rsi_meanrev",
+) -> dict:
+    preset = STRATEGY_PRESETS[strategy_name]
+    strategy = preset["make_strategy"]()
+    risk = RiskManager(**preset["risk_kwargs"])
 
     balance = starting_balance
     position = None  # dict: entry_price, quantity, opened_at, peak_price, amount_spent
@@ -137,11 +160,16 @@ def run_backtest(df: pd.DataFrame, starting_balance: float, fee_pct: float = 0.0
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Backtest the RSI/SMA strategy")
+    parser = argparse.ArgumentParser(description="Backtest a trading strategy")
     parser.add_argument("--symbol", default="BTCUSDT")
     parser.add_argument("--interval", default="15m")
     parser.add_argument("--days", type=int, default=30)
     parser.add_argument("--balance", type=float, default=400.0)
+    parser.add_argument(
+        "--strategy", choices=list(STRATEGY_PRESETS), default="rsi_meanrev",
+        help="rsi_meanrev = buy dips in an uptrend (best on 15m). "
+             "breakout = buy new highs, trend-following (best on 4h/1d).",
+    )
     parser.add_argument(
         "--fee-pct", type=float, default=0.001,
         help="Trading fee per side, as a fraction (default 0.001 = 0.1%%, Binance's standard spot taker fee).",
@@ -150,11 +178,12 @@ def main():
 
     print(f"Fetching {args.days} days of {args.interval} candles for {args.symbol}...")
     df = fetch_history(args.symbol, args.interval, args.days)
-    print(f"Got {len(df)} candles. Running backtest with starting balance ${args.balance:.2f}...\n")
+    print(f"Got {len(df)} candles. Running '{args.strategy}' backtest with starting balance ${args.balance:.2f}...\n")
 
-    result = run_backtest(df, args.balance, fee_pct=args.fee_pct)
+    result = run_backtest(df, args.balance, fee_pct=args.fee_pct, strategy_name=args.strategy)
 
     print("=" * 60)
+    print(f"Strategy:         {args.strategy}")
     print(f"Symbol:           {args.symbol}")
     print(f"Period:           last {args.days} days ({args.interval} candles)")
     print(f"Fee per side:     {args.fee_pct:.2%}")

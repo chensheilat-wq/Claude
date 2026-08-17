@@ -16,7 +16,7 @@ Usage:
 
 import argparse
 
-from backtest import fetch_history, run_backtest
+from backtest import STRATEGY_PRESETS, fetch_history, run_backtest
 
 DEFAULT_SYMBOLS = ["BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "XRPUSDT", "ADAUSDT"]
 
@@ -24,7 +24,11 @@ DEFAULT_SYMBOLS = ["BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "XRPUSDT", "ADAUS
 def main():
     parser = argparse.ArgumentParser(description="Validate strategy edge across symbols and time periods")
     parser.add_argument("--symbols", nargs="+", default=DEFAULT_SYMBOLS)
-    parser.add_argument("--interval", default="15m")
+    parser.add_argument("--interval", default="15m", help="e.g. 15m for rsi_meanrev, 4h or 1d for breakout")
+    parser.add_argument(
+        "--strategy", choices=list(STRATEGY_PRESETS), default="rsi_meanrev",
+        help="rsi_meanrev = buy dips in an uptrend. breakout = buy new highs, trend-following.",
+    )
     parser.add_argument("--days", type=int, default=180, help="Total historical days to fetch per symbol")
     parser.add_argument("--chunks", type=int, default=3, help="Split the history into this many non-overlapping periods")
     parser.add_argument("--balance", type=float, default=400.0)
@@ -43,7 +47,7 @@ def main():
 
         n = len(df)
         chunk_size = n // args.chunks
-        if chunk_size < 100:
+        if chunk_size < 40:
             print(f"  Not enough candles ({n}) to split into {args.chunks} meaningful chunks - skipping.")
             continue
 
@@ -52,7 +56,7 @@ def main():
             end = n if i == args.chunks - 1 else (i + 1) * chunk_size
             chunk_df = df.iloc[start:end].reset_index(drop=True)
 
-            result = run_backtest(chunk_df, args.balance, fee_pct=args.fee_pct)
+            result = run_backtest(chunk_df, args.balance, fee_pct=args.fee_pct, strategy_name=args.strategy)
             period_start = chunk_df["open_time"].iloc[0]
             period_end = chunk_df["open_time"].iloc[-1]
             print(
