@@ -11,6 +11,7 @@ is explicitly set, in which case it trades with REAL MONEY.
 
 import sys
 
+from src.crypto_agent.capital_ledger import CapitalLedger
 from src.crypto_agent.config import load_config
 from src.crypto_agent.exchange_client import ExchangeClient
 from src.crypto_agent.logger_setup import setup_logging
@@ -62,7 +63,15 @@ def main() -> int:
         max_daily_loss_pct=config.max_daily_loss_pct,
         max_trades_per_day=config.max_trades_per_day,
     )
-    trader = Trader(config, exchange, strategy, risk_manager)
+    capital_ledger = None
+    if config.profit_lock_enabled:
+        capital_ledger = CapitalLedger(principal=config.profit_lock_principal)
+        logger.info(
+            "Profit-lock ladder enabled: principal=%.2f, reserve=%.2f, next milestone=%.2f",
+            capital_ledger.principal, capital_ledger.reserve_balance, capital_ledger.next_milestone,
+        )
+
+    trader = Trader(config, exchange, strategy, risk_manager, capital_ledger=capital_ledger)
 
     try:
         trader.run_forever()

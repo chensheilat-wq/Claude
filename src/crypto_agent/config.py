@@ -52,6 +52,9 @@ class Config:
     max_daily_loss_pct: float
     max_trades_per_day: int
 
+    profit_lock_enabled: bool
+    profit_lock_principal: float
+
     loop_interval_seconds: int
 
     def validate(self) -> None:
@@ -82,6 +85,8 @@ class Config:
             problems.append("MAX_DAILY_LOSS_PCT must be between 0 and 1.")
         if self.max_trades_per_day <= 0:
             problems.append("MAX_TRADES_PER_DAY must be positive.")
+        if self.profit_lock_enabled and self.profit_lock_principal <= 0:
+            problems.append("PROFIT_LOCK_PRINCIPAL must be positive when profit-lock is enabled.")
         if problems:
             raise ValueError("Invalid configuration:\n- " + "\n- ".join(problems))
 
@@ -111,6 +116,8 @@ def load_config() -> Config:
         crash_window_minutes=_get_float("CRASH_WINDOW_MINUTES", 60),
         max_daily_loss_pct=_get_float("MAX_DAILY_LOSS_PCT", 0.05),
         max_trades_per_day=_get_int("MAX_TRADES_PER_DAY", 6),
+        profit_lock_enabled=_get_bool("PROFIT_LOCK_ENABLED", True),
+        profit_lock_principal=_get_float("PROFIT_LOCK_PRINCIPAL", 400),
         loop_interval_seconds=_get_int("LOOP_INTERVAL_SECONDS", 60),
     )
     cfg.validate()

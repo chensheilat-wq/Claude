@@ -6,6 +6,7 @@ import logging
 import time
 from datetime import datetime, timedelta, timezone
 
+from .capital_ledger import CapitalLedger
 from .config import Config
 from .exchange_client import ExchangeClient
 from .risk_manager import RiskManager
@@ -24,6 +25,7 @@ class Trader:
         strategy: RsiTrendStrategy,
         risk_manager: RiskManager,
         state_store: StateStore | None = None,
+        capital_ledger: CapitalLedger | None = None,
     ):
         self.config = config
         self.exchange = exchange
@@ -31,6 +33,7 @@ class Trader:
         self.risk_manager = risk_manager
         self.state_store = state_store or StateStore()
         self.quote_asset = config.quote_asset
+        self.ledger = capital_ledger
         self.position: Position | None = self.state_store.load()
         if self.position:
             logger.info("Restored open position from previous run: %s", self.position)
@@ -91,8 +94,16 @@ class Trader:
         return best
 
     def _handle_no_position(self, now: datetime) -> None:
+        # The account is fully in the quote asset right now (no open position),
+        # so this is the correct moment to check the profit-lock ladder.
         quote_balance = self.exchange.get_quote_balance(self.quote_asset)
-        can_trade, reason = self.risk_manager.can_open_trade(now, quote_balance)
+        if self.ledger is not None:
+            self.ledger.check_and_lock(quote_balance)
+            trading_balance = self.ledger.trading_capital(quote_balance)
+        else:
+            trading_balance = quote_balance
+
+        can_trade, reason = self.risk_manager.can_open_trade(now, trading_balance)
         if not can_trade:
             logger.info("Skipping BUY scan: %s", reason)
             return
@@ -103,7 +114,7 @@ class Trader:
         symbol, decision = best
         logger.info("Best entry candidate: %s | %s", symbol, decision.reason)
 
-        order_amount = self.risk_manager.position_size(quote_balance)
+        order_amount = self.risk_manager.position_size(trading_balance)
         if order_amount < 10:  # Binance minimum notional is typically ~$5-10
             logger.warning("Position size %.2f too small to trade, skipping", order_amount)
             return
@@ -169,8 +180,10 @@ class Trader:
             self.position.symbol, reason, self.position.entry_price, exit_price, pnl,
         )
 
+        # Balance is pure quote-asset again now that the position is closed.
         new_balance = self.exchange.get_quote_balance(self.quote_asset)
-        self.risk_manager.record_closed_trade(now, pnl, new_balance)
+        new_trading_balance = self.ledger.trading_capital(new_balance) if self.ledger else new_balance
+        self.risk_manager.record_closed_trade(now, pnl, new_trading_balance)
 
         self.position = None
         self.state_store.save(None)
