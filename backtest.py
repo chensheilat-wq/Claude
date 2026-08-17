@@ -8,6 +8,7 @@ Usage:
 """
 
 import argparse
+from datetime import timedelta
 
 import pandas as pd
 from binance.client import Client
@@ -31,18 +32,30 @@ def fetch_history(symbol: str, interval: str, days: int) -> pd.DataFrame:
     return df
 
 
+def _price_before_crash_window(df_window: pd.DataFrame, now, crash_window_minutes: float):
+    target = now - timedelta(minutes=crash_window_minutes)
+    candidates = df_window[df_window["open_time"] <= target]
+    if candidates.empty:
+        return None
+    return float(candidates["close"].iloc[-1])
+
+
 def run_backtest(df: pd.DataFrame, starting_balance: float) -> dict:
     strategy = RsiTrendStrategy()
     risk = RiskManager(
         max_position_pct=0.20,
-        stop_loss_pct=0.02,
-        take_profit_pct=0.04,
+        stop_loss_pct=0.015,
+        trailing_activation_pct=0.02,
+        trailing_distance_pct=0.015,
+        max_hold_hours=6,
+        crash_drop_pct=0.07,
+        crash_window_minutes=60,
         max_daily_loss_pct=0.05,
         max_trades_per_day=6,
     )
 
     balance = starting_balance
-    position = None  # (entry_price, quantity)
+    position = None  # dict: entry_price, quantity, opened_at, peak_price
     trades = []
     min_candles = strategy.min_candles_required()
 
@@ -59,19 +72,28 @@ def run_backtest(df: pd.DataFrame, starting_balance: float) -> dict:
             if decision.signal == Signal.BUY:
                 amount = risk.position_size(balance)
                 qty = amount / price
-                position = (price, qty)
+                position = {"entry_price": price, "quantity": qty, "opened_at": now, "peak_price": price}
         else:
-            entry_price, qty = position
-            should_exit, reason = risk.check_exit(entry_price, price)
+            position["peak_price"] = max(position["peak_price"], price)
+            price_before_crash = _price_before_crash_window(window, now, risk.crash_window_minutes)
+
+            should_exit, reason = risk.check_exit(
+                entry_price=position["entry_price"],
+                current_price=price,
+                peak_price=position["peak_price"],
+                opened_at=position["opened_at"],
+                now=now,
+                price_before_crash_window=price_before_crash,
+            )
             if not should_exit:
                 decision = strategy.decide(window, has_open_position=True)
                 if decision.signal == Signal.SELL:
                     should_exit, reason = True, decision.reason
             if should_exit:
-                pnl = (price - entry_price) * qty
+                pnl = (price - position["entry_price"]) * position["quantity"]
                 balance += pnl
                 risk.record_closed_trade(now, pnl, balance)
-                trades.append({"entry": entry_price, "exit": price, "pnl": pnl, "reason": reason, "time": now})
+                trades.append({"entry": position["entry_price"], "exit": price, "pnl": pnl, "reason": reason, "time": now})
                 position = None
 
     total_return_pct = (balance - starting_balance) / starting_balance * 100

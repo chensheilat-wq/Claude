@@ -54,7 +54,11 @@ def main() -> int:
     risk_manager = RiskManager(
         max_position_pct=config.max_position_pct,
         stop_loss_pct=config.stop_loss_pct,
-        take_profit_pct=config.take_profit_pct,
+        trailing_activation_pct=config.trailing_activation_pct,
+        trailing_distance_pct=config.trailing_distance_pct,
+        max_hold_hours=config.max_hold_hours,
+        crash_drop_pct=config.crash_drop_pct,
+        crash_window_minutes=config.crash_window_minutes,
         max_daily_loss_pct=config.max_daily_loss_pct,
         max_trades_per_day=config.max_trades_per_day,
     )

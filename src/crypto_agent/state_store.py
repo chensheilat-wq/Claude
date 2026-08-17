@@ -13,6 +13,7 @@ class Position:
     entry_price: float
     quantity: float
     opened_at: str  # ISO timestamp
+    peak_price: float = 0.0  # highest price observed since entry (drives the trailing stop)
 
 
 class StateStore:

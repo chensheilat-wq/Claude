@@ -41,7 +41,11 @@ class Config:
 
     max_position_pct: float
     stop_loss_pct: float
-    take_profit_pct: float
+    trailing_activation_pct: float
+    trailing_distance_pct: float
+    max_hold_hours: float
+    crash_drop_pct: float
+    crash_window_minutes: float
     max_daily_loss_pct: float
     max_trades_per_day: int
 
@@ -57,8 +61,16 @@ class Config:
             problems.append("MAX_POSITION_PCT must be between 0 and 1.")
         if not (0 < self.stop_loss_pct < 1):
             problems.append("STOP_LOSS_PCT must be between 0 and 1.")
-        if not (0 < self.take_profit_pct < 1):
-            problems.append("TAKE_PROFIT_PCT must be between 0 and 1.")
+        if not (0 < self.trailing_activation_pct < 1):
+            problems.append("TRAILING_ACTIVATION_PCT must be between 0 and 1.")
+        if not (0 < self.trailing_distance_pct < 1):
+            problems.append("TRAILING_DISTANCE_PCT must be between 0 and 1.")
+        if self.max_hold_hours <= 0:
+            problems.append("MAX_HOLD_HOURS must be positive.")
+        if not (0 < self.crash_drop_pct < 1):
+            problems.append("CRASH_DROP_PCT must be between 0 and 1.")
+        if self.crash_window_minutes <= 0:
+            problems.append("CRASH_WINDOW_MINUTES must be positive.")
         if not (0 < self.max_daily_loss_pct < 1):
             problems.append("MAX_DAILY_LOSS_PCT must be between 0 and 1.")
         if self.max_trades_per_day <= 0:
@@ -79,8 +91,12 @@ def load_config() -> Config:
         rsi_overbought=_get_float("RSI_OVERBOUGHT", 70),
         sma_period=_get_int("SMA_PERIOD", 50),
         max_position_pct=_get_float("MAX_POSITION_PCT", 0.20),
-        stop_loss_pct=_get_float("STOP_LOSS_PCT", 0.02),
-        take_profit_pct=_get_float("TAKE_PROFIT_PCT", 0.04),
+        stop_loss_pct=_get_float("STOP_LOSS_PCT", 0.015),
+        trailing_activation_pct=_get_float("TRAILING_ACTIVATION_PCT", 0.02),
+        trailing_distance_pct=_get_float("TRAILING_DISTANCE_PCT", 0.015),
+        max_hold_hours=_get_float("MAX_HOLD_HOURS", 6),
+        crash_drop_pct=_get_float("CRASH_DROP_PCT", 0.07),
+        crash_window_minutes=_get_float("CRASH_WINDOW_MINUTES", 60),
         max_daily_loss_pct=_get_float("MAX_DAILY_LOSS_PCT", 0.05),
         max_trades_per_day=_get_int("MAX_TRADES_PER_DAY", 6),
         loop_interval_seconds=_get_int("LOOP_INTERVAL_SECONDS", 60),

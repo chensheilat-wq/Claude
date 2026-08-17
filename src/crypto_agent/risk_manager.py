@@ -1,8 +1,25 @@
-"""Risk management: position sizing, stop-loss/take-profit, and a daily kill-switch.
+"""Risk management: position sizing, exit rules, and a daily kill-switch.
 
 This module knows nothing about Binance or the strategy - it is pure bookkeeping
 and math, which makes it easy to unit test and to trust. The Trader is required
 to consult it before every trade.
+
+Exit rules, checked in this priority order (highest priority first):
+
+  1. Crash circuit-breaker - if price drops `crash_drop_pct` or more within the
+     last `crash_window_minutes`, sell immediately. This exists specifically for
+     sudden market crashes, where waiting for the normal stop-loss distance
+     could mean a much worse fill.
+  2. Hard stop-loss - if price is down `stop_loss_pct` or more from the entry
+     price, sell. This is the capital-protection floor for every single trade.
+  3. Trailing stop - once a position has gained at least
+     `trailing_activation_pct` from entry, a trailing stop activates: if price
+     then pulls back `trailing_distance_pct` from its peak since entry, sell.
+     This lets winners run further than a fixed take-profit would, while still
+     locking in gains on a reversal.
+  4. Time-limit exit - if a position has been open for more than
+     `max_hold_hours` without hitting any of the above, sell at market. This
+     prevents capital from sitting idle in a position that is going nowhere.
 """
 
 from dataclasses import dataclass, field
@@ -13,7 +30,11 @@ from datetime import date, datetime
 class RiskManager:
     max_position_pct: float
     stop_loss_pct: float
-    take_profit_pct: float
+    trailing_activation_pct: float
+    trailing_distance_pct: float
+    max_hold_hours: float
+    crash_drop_pct: float
+    crash_window_minutes: float
     max_daily_loss_pct: float
     max_trades_per_day: int
 
@@ -45,15 +66,49 @@ class RiskManager:
         """Amount of quote currency to risk on the next trade."""
         return max(0.0, available_balance * self.max_position_pct)
 
-    def check_exit(self, entry_price: float, current_price: float) -> tuple[bool, str | None]:
-        """Returns (should_exit, reason) based on stop-loss / take-profit thresholds."""
+    def check_exit(
+        self,
+        entry_price: float,
+        current_price: float,
+        peak_price: float,
+        opened_at: datetime,
+        now: datetime,
+        price_before_crash_window: float | None = None,
+    ) -> tuple[bool, str | None]:
+        """Returns (should_exit, reason). See module docstring for rule priority."""
         if entry_price <= 0:
             return False, None
-        change = (current_price - entry_price) / entry_price
-        if change <= -self.stop_loss_pct:
-            return True, f"stop-loss hit ({change:.2%})"
-        if change >= self.take_profit_pct:
-            return True, f"take-profit hit ({change:.2%})"
+
+        # 1. Crash circuit-breaker - overrides everything else.
+        if price_before_crash_window is not None and price_before_crash_window > 0:
+            crash_change = (current_price - price_before_crash_window) / price_before_crash_window
+            if crash_change <= -self.crash_drop_pct:
+                return True, (
+                    f"CRASH circuit-breaker: price dropped {crash_change:.2%} "
+                    f"within ~{self.crash_window_minutes:.0f} min - selling immediately"
+                )
+
+        # 2. Hard stop-loss.
+        change_from_entry = (current_price - entry_price) / entry_price
+        if change_from_entry <= -self.stop_loss_pct:
+            return True, f"stop-loss hit ({change_from_entry:.2%} from entry)"
+
+        # 3. Trailing stop, once activated by enough profit from entry.
+        peak_price = max(peak_price, entry_price, current_price)
+        profit_at_peak = (peak_price - entry_price) / entry_price
+        if profit_at_peak >= self.trailing_activation_pct:
+            drop_from_peak = (current_price - peak_price) / peak_price
+            if drop_from_peak <= -self.trailing_distance_pct:
+                return True, (
+                    f"trailing-stop hit: peak was {peak_price:.2f} (+{profit_at_peak:.2%}), "
+                    f"now {drop_from_peak:.2%} off peak"
+                )
+
+        # 4. Time-limit exit for positions going nowhere.
+        hours_open = (now - opened_at).total_seconds() / 3600
+        if hours_open >= self.max_hold_hours:
+            return True, f"time-limit exit after {hours_open:.1f}h without hitting target/stop"
+
         return False, None
 
     def record_closed_trade(self, now: datetime, pnl_amount: float, current_balance: float) -> None:

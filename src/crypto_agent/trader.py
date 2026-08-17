@@ -4,7 +4,7 @@ risk manager. This is the only place that actually decides to place orders.
 
 import logging
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 from .config import Config
 from .exchange_client import ExchangeClient
@@ -42,6 +42,22 @@ class Trader:
         if self.position:
             logger.info("Restored open position from previous run: %s", self.position)
 
+        # In-memory rolling price samples, used only for the crash circuit-breaker
+        # (compares current price against the price observed ~crash_window_minutes ago).
+        self._price_history: list[tuple[datetime, float]] = []
+
+    def _record_price_sample(self, now: datetime, price: float) -> None:
+        self._price_history.append((now, price))
+        cutoff = now - timedelta(minutes=self.risk_manager.crash_window_minutes * 2)
+        self._price_history = [(t, p) for t, p in self._price_history if t >= cutoff]
+
+    def _price_before_crash_window(self, now: datetime) -> float | None:
+        target = now - timedelta(minutes=self.risk_manager.crash_window_minutes)
+        candidates = [(t, p) for t, p in self._price_history if t <= target]
+        if not candidates:
+            return None  # not enough history yet (e.g. bot just started) - breaker simply can't fire
+        return candidates[-1][1]
+
     def _handle_no_position(self, now: datetime) -> None:
         quote_balance = self.exchange.get_quote_balance(self.quote_asset)
         can_trade, reason = self.risk_manager.can_open_trade(now, quote_balance)
@@ -73,15 +89,32 @@ class Trader:
             entry_price=entry_price,
             quantity=filled_qty,
             opened_at=now.isoformat(),
+            peak_price=entry_price,
         )
         self.state_store.save(self.position)
         logger.info("Opened position: %s", self.position)
 
-    def _handle_open_position(self, now: datetime) -> None:
+    def _handle_open_position(self, now: datetime, current_price: float) -> None:
         assert self.position is not None
-        current_price = self.exchange.get_current_price(self.config.symbol)
 
-        should_exit, reason = self.risk_manager.check_exit(self.position.entry_price, current_price)
+        # Track the peak price since entry - this drives the trailing stop - and
+        # persist it immediately so a restart mid-trade doesn't lose the high-water mark.
+        if current_price > self.position.peak_price:
+            self.position.peak_price = current_price
+            self.state_store.save(self.position)
+
+        opened_at = datetime.fromisoformat(self.position.opened_at)
+        price_before_crash_window = self._price_before_crash_window(now)
+
+        should_exit, reason = self.risk_manager.check_exit(
+            entry_price=self.position.entry_price,
+            current_price=current_price,
+            peak_price=self.position.peak_price,
+            opened_at=opened_at,
+            now=now,
+            price_before_crash_window=price_before_crash_window,
+        )
+
         if not should_exit:
             klines = self.exchange.get_klines(self.config.symbol, self.config.interval)
             decision = self.strategy.decide(klines, has_open_position=True)
@@ -110,12 +143,15 @@ class Trader:
 
     def run_once(self) -> None:
         now = datetime.now(timezone.utc)
+        current_price = self.exchange.get_current_price(self.config.symbol)
+        self._record_price_sample(now, current_price)
+
         if self.risk_manager.kill_switch_active:
             logger.warning("Kill-switch active - no new trades will open today")
         if self.position is None:
             self._handle_no_position(now)
         else:
-            self._handle_open_position(now)
+            self._handle_open_position(now, current_price)
 
     def run_forever(self) -> None:
         logger.info(
