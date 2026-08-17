@@ -34,6 +34,13 @@ class ExchangeClient:
         ticker = self.client.get_symbol_ticker(symbol=symbol)
         return float(ticker["price"])
 
+    def get_all_24h_tickers(self) -> list[dict]:
+        """24h stats (incl. quoteVolume) for every symbol, in a single API call.
+        Used by the screener to rank candidates by liquidity without hammering
+        the API once per symbol.
+        """
+        return self.client.get_ticker()
+
     def get_quote_balance(self, quote_asset: str) -> float:
         """e.g. quote_asset='USDT' for symbol BTCUSDT."""
         balance = self.client.get_asset_balance(asset=quote_asset)

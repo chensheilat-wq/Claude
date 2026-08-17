@@ -9,18 +9,11 @@ from datetime import datetime, timedelta, timezone
 from .config import Config
 from .exchange_client import ExchangeClient
 from .risk_manager import RiskManager
+from .screener import build_candidate_symbols
 from .state_store import Position, StateStore
-from .strategy import RsiTrendStrategy, Signal
+from .strategy import RsiTrendStrategy, Signal, StrategyDecision
 
 logger = logging.getLogger("crypto_agent")
-
-
-def split_symbol(symbol: str, quote_hint: str = "USDT") -> tuple[str, str]:
-    """Best-effort split of e.g. 'BTCUSDT' -> ('BTC', 'USDT')."""
-    if symbol.endswith(quote_hint):
-        return symbol[: -len(quote_hint)], quote_hint
-    # Fallback: assume last 3 chars are the quote asset (e.g. BTCBUSD-style is 4, handled above).
-    return symbol[:-3], symbol[-3:]
 
 
 class Trader:
@@ -37,7 +30,7 @@ class Trader:
         self.strategy = strategy
         self.risk_manager = risk_manager
         self.state_store = state_store or StateStore()
-        self.base_asset, self.quote_asset = split_symbol(config.symbol)
+        self.quote_asset = config.quote_asset
         self.position: Position | None = self.state_store.load()
         if self.position:
             logger.info("Restored open position from previous run: %s", self.position)
@@ -58,26 +51,64 @@ class Trader:
             return None  # not enough history yet (e.g. bot just started) - breaker simply can't fire
         return candidates[-1][1]
 
+    def _scan_for_best_entry(self) -> tuple[str, StrategyDecision] | None:
+        """Screens for liquid candidates, evaluates each for a BUY setup, and
+        returns the single best one (lowest RSI = most oversold among the
+        setups found), since only one position may be open at a time.
+        """
+        candidates = build_candidate_symbols(
+            self.exchange,
+            self.config.quote_asset,
+            self.config.min_24h_quote_volume,
+            self.config.max_candidates,
+            self.config.excluded_base_assets,
+        )
+        if not candidates:
+            logger.info("No liquid candidates passed the screener this cycle")
+            return None
+
+        best: tuple[str, StrategyDecision] | None = None
+        for symbol in candidates:
+            try:
+                klines = self.exchange.get_klines(symbol, self.config.interval)
+            except Exception:
+                logger.exception("Failed to fetch klines for %s - skipping this cycle", symbol)
+                continue
+
+            decision = self.strategy.decide(klines, has_open_position=False)
+            if decision.signal != Signal.BUY:
+                continue
+
+            if best is None or (
+                decision.rsi_value is not None
+                and best[1].rsi_value is not None
+                and decision.rsi_value < best[1].rsi_value
+            ):
+                best = (symbol, decision)
+
+        if best is None:
+            logger.info("Scanned %d liquid candidates, no entry setup this cycle", len(candidates))
+        return best
+
     def _handle_no_position(self, now: datetime) -> None:
         quote_balance = self.exchange.get_quote_balance(self.quote_asset)
         can_trade, reason = self.risk_manager.can_open_trade(now, quote_balance)
         if not can_trade:
-            logger.info("Skipping BUY check: %s", reason)
+            logger.info("Skipping BUY scan: %s", reason)
             return
 
-        klines = self.exchange.get_klines(self.config.symbol, self.config.interval)
-        decision = self.strategy.decide(klines, has_open_position=False)
-        logger.info("Signal=%s | %s", decision.signal.value, decision.reason)
-
-        if decision.signal != Signal.BUY:
+        best = self._scan_for_best_entry()
+        if best is None:
             return
+        symbol, decision = best
+        logger.info("Best entry candidate: %s | %s", symbol, decision.reason)
 
         order_amount = self.risk_manager.position_size(quote_balance)
         if order_amount < 10:  # Binance minimum notional is typically ~$5-10
             logger.warning("Position size %.2f too small to trade, skipping", order_amount)
             return
 
-        order = self.exchange.place_market_buy(self.config.symbol, order_amount)
+        order = self.exchange.place_market_buy(symbol, order_amount)
         filled_qty = float(order.get("executedQty", 0)) or (order_amount / decision.price)
         entry_price = decision.price
         fills = order.get("fills")
@@ -85,7 +116,7 @@ class Trader:
             entry_price = sum(float(f["price"]) * float(f["qty"]) for f in fills) / filled_qty
 
         self.position = Position(
-            symbol=self.config.symbol,
+            symbol=symbol,
             entry_price=entry_price,
             quantity=filled_qty,
             opened_at=now.isoformat(),
@@ -116,7 +147,7 @@ class Trader:
         )
 
         if not should_exit:
-            klines = self.exchange.get_klines(self.config.symbol, self.config.interval)
+            klines = self.exchange.get_klines(self.position.symbol, self.config.interval)
             decision = self.strategy.decide(klines, has_open_position=True)
             logger.info("Signal=%s | %s", decision.signal.value, decision.reason)
             if decision.signal == Signal.SELL:
@@ -125,7 +156,7 @@ class Trader:
         if not should_exit:
             return
 
-        order = self.exchange.place_market_sell(self.config.symbol, self.position.quantity)
+        order = self.exchange.place_market_sell(self.position.symbol, self.position.quantity)
         exit_price = current_price
         fills = order.get("fills")
         filled_qty = float(order.get("executedQty", self.position.quantity))
@@ -133,7 +164,10 @@ class Trader:
             exit_price = sum(float(f["price"]) * float(f["qty"]) for f in fills) / filled_qty
 
         pnl = (exit_price - self.position.entry_price) * self.position.quantity
-        logger.info("Closed position (%s): entry=%.2f exit=%.2f pnl=%.2f", reason, self.position.entry_price, exit_price, pnl)
+        logger.info(
+            "Closed position %s (%s): entry=%.4f exit=%.4f pnl=%.2f",
+            self.position.symbol, reason, self.position.entry_price, exit_price, pnl,
+        )
 
         new_balance = self.exchange.get_quote_balance(self.quote_asset)
         self.risk_manager.record_closed_trade(now, pnl, new_balance)
@@ -143,20 +177,24 @@ class Trader:
 
     def run_once(self) -> None:
         now = datetime.now(timezone.utc)
-        current_price = self.exchange.get_current_price(self.config.symbol)
-        self._record_price_sample(now, current_price)
 
         if self.risk_manager.kill_switch_active:
             logger.warning("Kill-switch active - no new trades will open today")
+
         if self.position is None:
+            # Crash-breaker price history only makes sense while protecting an
+            # open position - nothing to protect right now, so keep it empty.
+            self._price_history.clear()
             self._handle_no_position(now)
         else:
+            current_price = self.exchange.get_current_price(self.position.symbol)
+            self._record_price_sample(now, current_price)
             self._handle_open_position(now, current_price)
 
     def run_forever(self) -> None:
         logger.info(
-            "Starting trading loop for %s | interval=%s | testnet=%s",
-            self.config.symbol, self.config.interval, self.exchange.use_testnet,
+            "Starting trading loop | quote_asset=%s | interval=%s | max_candidates=%d | testnet=%s",
+            self.config.quote_asset, self.config.interval, self.config.max_candidates, self.exchange.use_testnet,
         )
         while True:
             try:
