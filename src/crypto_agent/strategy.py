@@ -12,6 +12,8 @@ It is intentionally conservative. It will NOT trade constantly - on purpose,
 since frequent trading mostly just bleeds the account through fees.
 """
 
+from __future__ import annotations
+
 from dataclasses import dataclass
 from enum import Enum
 

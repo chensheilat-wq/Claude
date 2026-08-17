@@ -22,6 +22,8 @@ Exit rules, checked in this priority order (highest priority first):
      prevents capital from sitting idle in a position that is going nowhere.
 """
 
+from __future__ import annotations
+
 from dataclasses import dataclass, field
 from datetime import date, datetime
 

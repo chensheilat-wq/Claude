@@ -23,6 +23,8 @@ Example: principal=400 -> milestones 800, 1600, 3200, 6400, ...
   3200 reached -> reserve=1600, trading capital=1600
 """
 
+from __future__ import annotations
+
 import json
 import logging
 import os

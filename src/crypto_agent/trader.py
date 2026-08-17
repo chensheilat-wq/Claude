@@ -2,6 +2,8 @@
 risk manager. This is the only place that actually decides to place orders.
 """
 
+from __future__ import annotations
+
 import logging
 import time
 from datetime import datetime, timedelta, timezone

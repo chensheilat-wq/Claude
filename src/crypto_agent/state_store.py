@@ -2,6 +2,8 @@
 bot "forget" it holds a real position and buy again on top of it.
 """
 
+from __future__ import annotations
+
 import json
 import os
 from dataclasses import asdict, dataclass
