@@ -8,6 +8,7 @@ Usage:
 """
 
 import argparse
+from collections import defaultdict
 from datetime import timedelta
 
 import pandas as pd
@@ -30,6 +31,23 @@ def fetch_history(symbol: str, interval: str, days: int) -> pd.DataFrame:
         df[col] = df[col].astype(float)
     df["open_time"] = pd.to_datetime(df["open_time"], unit="ms")
     return df
+
+
+def categorize_exit_reason(reason: str) -> str:
+    """Buckets a RiskManager/strategy exit reason string for reporting."""
+    if not reason:
+        return "unknown"
+    if "CRASH" in reason:
+        return "crash-breaker"
+    if "stop-loss" in reason:
+        return "stop-loss"
+    if "trailing-stop" in reason:
+        return "trailing-stop"
+    if "time-limit" in reason:
+        return "time-limit"
+    if "RSI" in reason:
+        return "RSI-overbought-signal"
+    return "other"
 
 
 def _price_before_crash_window(df_window: pd.DataFrame, now, crash_window_minutes: float):
@@ -147,6 +165,20 @@ def main():
     print(f"Win rate:         {result['win_rate_pct']:.1f}%")
     print(f"Total fees paid:  ${result['total_fees_paid']:.2f}")
     print("=" * 60)
+
+    if result["trades"]:
+        print("\nExit reason breakdown:")
+        stats = defaultdict(lambda: {"count": 0, "pnl": 0.0, "wins": 0})
+        for t in result["trades"]:
+            cat = categorize_exit_reason(t["reason"])
+            stats[cat]["count"] += 1
+            stats[cat]["pnl"] += t["pnl"]
+            if t["pnl"] > 0:
+                stats[cat]["wins"] += 1
+        for cat, s in sorted(stats.items(), key=lambda kv: -kv[1]["count"]):
+            win_rate = (s["wins"] / s["count"] * 100) if s["count"] else 0.0
+            print(f"  {cat:<22} count={s['count']:>3}  win_rate={win_rate:>5.1f}%  total_pnl=${s['pnl']:+.2f}")
+
     print("\nNOTE: past performance on historical data is NOT a guarantee of")
     print("future results. This models Binance's standard trading fee but")
     print("still ignores real-world slippage. Use this as a sanity check,")
