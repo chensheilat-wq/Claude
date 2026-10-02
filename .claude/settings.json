@@ -4,8 +4,8 @@
       "WebSearch",
       "Artifact",
       "SendUserFile",
-      "Bash(cat > /tmp/claude-0/-home-user-Claude/ad3c5fd8-ffc4-5068-a990-354b0ca12a09/scratchpad/horoscope-*.html <<*)",
-      "Bash(ls /tmp/claude-0/-home-user-Claude/ad3c5fd8-ffc4-5068-a990-354b0ca12a09/scratchpad *)"
+      "Bash(cat > /tmp/claude-0/-home-user-Claude/ad3c5fd8-ffc4-5068-a990-354b0ca12a09/scratchpad/horoscope-*)",
+      "Bash(file /tmp/claude-0/-home-user-Claude/ad3c5fd8-ffc4-5068-a990-354b0ca12a09/scratchpad/*)"
     ]
   }
 }
