@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="he">
+<head>
+<meta charset="utf-8">
+<title>NAKITO Reel</title>
+<style>
+@font-face{font-family:'NSH';src:url(fonts/NotoSansHebrew-hebrew-100_900.woff2) format('woff2');font-weight:100 900;font-stretch:62.5% 100%;unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F;font-display:block}
+@font-face{font-family:'NSH';src:url(fonts/NotoSansHebrew-latin-100_900.woff2) format('woff2');font-weight:100 900;font-stretch:62.5% 100%;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:block}
+@font-face{font-family:'JBM';src:url(fonts/JetBrainsMono-latin-400.woff2) format('woff2');font-weight:100 800;font-display:block}
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:#0B0E11}
+#bg,#bar{position:absolute;inset:0}
+#bar{transform-origin:50% 900px}
+#cam{position:absolute;inset:0;transform-origin:512px 900px}
+.blk{position:absolute;left:512px;top:900px;font-family:'NSH';font-weight:900;line-height:1.12;white-space:nowrap;text-align:center;display:none}
+.line{display:block}
+.w{display:inline-block;transform-origin:50% 55%}
+.lbl{position:absolute;font-family:'JBM';font-weight:700;font-size:26px;letter-spacing:3px;white-space:nowrap}
+#frame{position:absolute;left:0;top:0;display:none}
+#frame .box{position:absolute;inset:0;border:3px solid #0B0E11}
+#frame .h{position:absolute;width:22px;height:22px;background:#E9ECEF;border:3px solid #0B0E11;box-sizing:border-box}
+#frame .tag{position:absolute;left:-3px;bottom:100%;margin-bottom:14px;background:#0B0E11;color:#5CD3FF;font-family:'JBM';font-weight:700;font-size:26px;letter-spacing:2px;padding:8px 14px;white-space:nowrap}
+#uline{position:absolute;height:8px;background:#5CD3FF;display:none}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="bg"></div>
+  <div id="bar"></div>
+  <div id="cam">
+    <div id="layer"></div>
+    <div id="frame"><div class="box"></div><div class="tag"></div></div>
+    <div id="uline"></div>
+    <div class="lbl" id="lblEnd" style="display:none">NAKITO · 60s · PATENT PENDING</div>
+  </div>
+  <div class="lbl" id="lblL" style="left:104px;top:272px">NAKITO</div>
+  <div class="lbl" id="lblR" style="right:104px;top:272px">01/24</div>
+  <svg width="0" height="0" style="position:absolute"><filter id="mb" x="-50%" y="-10%" width="200%" height="120%"><feGaussianBlur id="mbg" stdDeviation="0 0"/></filter></svg>
+</div>
+<script>
+// ---------- palette & grid ----------
+const K='#0B0E11', S='#C9CED4', I='#E9ECEF', C='#5CD3FF';
+const G=0.5, DUR=12, NG=24;
+const CX=512, CY=900;          // text centre (safe-zone centre, nudged left for IG buttons)
+const FIT=780, FIT_SLAM=624;   // rest widths; slam peaks at 1.25x = 780
+const HCAP=740;                // max font-size for single words
+const TEST=new URLSearchParams(location.search).has('test');
+
+// shots: g = first grid, n = grids, lines = array of arrays of words
+const shots=[
+ {g:0,n:1,kind:'intro'},
+ {g:1,n:1,bg:C,fg:K,lines:[['מגדירים']],entry:'slam'},
+ {g:2,n:1,bg:S,fg:K,lines:[['מגדירים']],entry:'cut',cond:true},
+ {g:3,n:1,bg:K,fg:S,lines:[['מחדש']],entry:'expand'},
+ {g:4,n:1,bg:I,fg:K,lines:[['את','הניקיון.']],entry:'slide'},
+ {g:5,n:2,bg:K,fg:S,lines:[['מגדירים'],['מחדש'],['את','הניקיון']],entry:'join',dot:true},
+ {g:7,n:1,bg:C,fg:K,lines:[['נקי.']],entry:'slam'},
+ {g:8,n:1,bg:K,fg:C,lines:[['מחוטא.']],entry:'expand'},
+ {g:9,n:2,bg:S,bg2:I,fg:K,lines:[['מאופס.']],entry:'frame'},
+ {g:11,n:1,bg:I,fg:K,lines:[['ככה','פשוט.']],entry:'slide'},
+ {g:12,n:2,bg:K,fg:S,lines:[['נקי.'],['מחוטא.'],['מאופס.'],['ככה','פשוט']],entry:'join',dot:true},
+ {g:14,n:1,bg:C,fg:K,lines:[['לחיצה']],entry:'slam'},
+ {g:15,n:1,bg:K,fg:C,lines:[['אחת.']],entry:'expand'},
+ {g:16,n:1,bg:I,fg:K,lines:[['ניקיון']],entry:'slide'},
+ {g:17,n:1,bg:C,fg:K,lines:[['מושלם.']],entry:'slam'},
+ {g:18,n:1,bg:S,fg:K,lines:[['מושלם.']],entry:'cut',cond:true},
+ {g:19,n:5,bg:K,fg:S,lines:[['לחיצה','אחת.'],['ניקיון','מושלם']],entry:'end',dot:true},
+];
+const TESTCOL=['#ff0000','#00ff00','#0000ff','#ffff00','#ff00ff','#00ffff'];
+
+// ---------- closed-form springs ----------
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+function spr(t,w,z){ // unit step response, 0 -> 1
+  if(t<=0) return 0;
+  if(z>=1) return 1-(1+w*t)*Math.exp(-w*t);
+  const wd=w*Math.sqrt(1-z*z);
+  return 1-Math.exp(-z*w*t)*(Math.cos(wd*t)+z*w/wd*Math.sin(wd*t));
+}
+function dspr(t,w,z){ // derivative of spr (per second)
+  if(t<=0) return 0;
+  if(z>=1) return w*w*t*Math.exp(-w*t);
+  const wd=w*Math.sqrt(1-z*z);
+  return Math.exp(-z*w*t)*(w*w/wd)*Math.sin(wd*t);
+}
+const steps=(t,list,w,z)=>list.reduce((a,[t0,d])=>a+d*spr(t-t0,w,z),0); // sum of springs, one per target change
+const shake=(t,hits)=>{let x=0,y=0;for(const [h,A] of hits){const d=t-h;if(d<0||d>0.35)continue;const e=A*Math.exp(-d/0.06);x+=e*Math.sin(2*Math.PI*26*d);y+=e*Math.sin(2*Math.PI*21*d+1.3);}return [x,y];};
+
+// ---------- build DOM ----------
+const layer=document.getElementById('layer');
+let gid=0;
+for(const s of shots){
+  if(s.kind==='intro') continue;
+  const el=document.createElement('div'); el.className='blk'; el.dir='rtl';
+  s.words=[];
+  s.lines.forEach((ln,li)=>{
+    const L=document.createElement('div'); L.className='line';
+    ln.forEach((w,wi)=>{
+      const sp=document.createElement('span'); sp.className='w'; sp.textContent=w;
+      sp.dataset.g=gid++;
+      L.appendChild(sp); s.words.push(sp);
+      if(wi<ln.length-1) L.appendChild(document.createTextNode(' '));
+    });
+    if(s.dot && li===s.lines.length-1){
+      const d=document.createElement('span'); d.className='w dot'; d.textContent='.';
+      d.dataset.g=s.words[s.words.length-1].dataset.g; // dot belongs to the last word
+      L.appendChild(d); s.dotEl=d;
+    }
+    el.appendChild(L);
+  });
+  s.el=el; layer.appendChild(el);
+}
+const frame=document.getElementById('frame'), tag=frame.querySelector('.tag');
+['0 0','50 0','100 0','0 50','100 50','0 100','50 100','100 100'].forEach(p=>{const [x,y]=p.split(' ');const h=document.createElement('div');h.className='h';h.style.left=`calc(${x}% - 11px)`;h.style.top=`calc(${y}% - 11px)`;frame.appendChild(h);});
+const uline=document.getElementById('uline'), lblEnd=document.getElementById('lblEnd');
+
+// ---------- measure & fit ----------
+function setVar(el,wdth,ls){el.style.fontVariationSettings=`"wght" 900, "wdth" ${wdth}`;el.style.letterSpacing=ls+'em';}
+const WIDE=[100,0.06], COND=[62.5,-0.01];
+function fit(){
+  for(const s of shots){ if(!s.el) continue;
+    const st=s.cond?COND:WIDE; s.state=st;
+    s.el.style.display='block'; s.el.style.fontSize='100px'; s.el.style.transform='none';
+    setVar(s.el,...st);
+    const lw=[...s.el.children].map(l=>{const r=document.createRange();r.selectNodeContents(l);return r.getBoundingClientRect().width;});
+    const maxw=Math.max(...lw);
+    const target=s.entry==='slam'?FIT_SLAM:FIT;
+    let fs=target/maxw*100;
+    const nl=s.lines.length;
+    const hcap= nl===1?HCAP: (s.entry==='end'?560:1180)/(nl*1.12);
+    fs=Math.min(fs,hcap);
+    s.fs=fs; s.el.style.fontSize=fs+'px'; s.el.style.display='none';
+  }
+}
+
+// ---------- per-grid background, camera targets, hits ----------
+const bgAt=[], rot=[0];
+for(let g=0;g<NG;g++){ rot.push([1.2,-1,0.8,-1.3,1,-0.7][g%6]); }
+const hits=[];
+for(const s of shots){
+  for(let k=0;k<s.n;k++) bgAt[s.g+k]= s.kind==='intro'?K : (k>0&&s.bg2?s.bg2:s.bg);
+  const t0=s.g*G;
+  if(s.kind==='intro') continue;
+  hits.push([t0,4]);
+  if(s.entry==='slam') hits.push([t0+0.07,13]);
+  if(s.entry==='frame') hits.push([t0+0.55,11]);
+  if(s.entry==='join') {hits.push([t0+0.32,10]);hits.push([t0+0.5,6]);}
+  if(s.entry==='end') {hits.push([t0+0.55,10]);hits.push([t0+1.0,5]);hits.push([t0+1.5,5]);hits.push([t0+2.0,6]);}
+}
+const rotSteps=rot.slice(1).map((r,g)=>[g*G,r-(rot[g]||0)]);
+
+// ---------- seek ----------
+const $=id=>document.getElementById(id);
+function seek(t){
+  t=clamp(t,0,DUR-1e-6);
+  const gi=Math.floor(t/G);
+  const shot=shots.find(s=>gi>=s.g&&gi<s.g+s.n);
+  const lt=t-shot.g*G, gl=t-gi*G;
+  $('bg').style.background= TEST?'#000':bgAt[gi];
+  // intro bar
+  const bar=$('bar');
+  if(shot.kind==='intro'){
+    bar.style.display='block'; bar.style.background=C;
+    const sweep=spr(lt,22,1);                        // line crosses right->left
+    const open=spr(lt-0.22,16,0.95);                 // then opens to full colour
+    bar.style.clipPath=`inset(${898*(1-open)}px 0 ${1018*(1-open)}px ${1080*(1-sweep)}px)`;
+    bar.style.transform='none';
+  } else bar.style.display='none';
+  // camera: constant push, small rotation springs, shake on hits
+  let push = shot.entry==='end' ? 1+0.07*(t-shot.g*G)/(shot.n*G) : 1+0.032*gl/G;
+  if(shot.entry==="join" && lt>=G) push+=0.04;       // punch-in cut on second grid
+  const ang=steps(t,rotSteps,14,0.6);
+  const [sx,sy]=shake(t,hits);
+  $('cam').style.transform=`translate(${sx}px,${sy}px) rotate(${ang}deg) scale(${push})`;
+  // labels
+  const fg=shot.fg||S;
+  for(const id of ['lblL','lblR']){ $(id).style.color=TEST?'#ffffff':fg; $(id).style.display=shot.kind==='intro'?'none':'block'; }
+  $('lblR').textContent=String(gi+1).padStart(2,'0')+'/'+NG;
+  $('lblL').dataset.g='L'; $('lblR').dataset.g='R';
+  // reset
+  for(const s of shots) if(s.el && s!==shot) s.el.style.display='none';
+  frame.style.display='none'; uline.style.display='none'; lblEnd.style.display='none';
+  $('mbg').setAttribute('stdDeviation','0 0');
+  if(!shot.el) return;
+  const el=shot.el; el.style.display='block'; el.style.color=fg; el.style.filter='none';
+  let [wd,ls]=shot.state;
+  let tx=0,ty=0,sc=1,op=1,rotG=0;
+  const up=(d,amp=44)=>amp*(1-spr(d,26,1));          // short upward move
+  const fade=(d,len=0.07)=>clamp(d/len);
+  switch(shot.entry){
+    case 'slam': sc=1.25-0.25*spr(lt,30,0.42); op=fade(lt,0.05); ty=up(lt,30); break;
+    case 'cut':  op=fade(lt,0.05); ty=up(lt,30); break;
+    case 'expand': { const e=spr(lt-0.03,15,0.78); wd=COND[0]+(WIDE[0]-COND[0])*e; ls=COND[1]+(WIDE[1]-COND[1])*e; op=fade(lt); ty=up(lt); break; }
+    case 'slide': { const D=980; tx=D*(1-spr(lt,17,0.9)); const v=D*dspr(lt,17,0.9);
+      $('mbg').setAttribute('stdDeviation',`${Math.min(42,v/60*0.35).toFixed(2)} 0`); if(v>30&&!TEST) el.style.filter='url(#mb)';
+      op=fade(lt,0.05); ty=up(lt,30); break; }
+    case 'frame': op=fade(lt); ty=up(lt);
+      rotG=4*spr(lt-0.12,16,0.5)-4*spr(lt-0.5,18,0.55); break;
+    default: break;
+  }
+  setVar(el,wd,ls);
+  el.style.opacity=op;
+  el.style.transform=`translate(-50%,-50%) translate(${tx}px,${ty}px) rotate(${rotG}deg) scale(${sc})`;
+  // per word (joins / end stagger) + test colours
+  shot.words.forEach((w,i)=>{
+    w.style.color=TEST?TESTCOL[i%TESTCOL.length]:'';
+    if(shot.entry==='join'||shot.entry==='end'){ const d=lt-0.05*i; w.style.opacity=fade(d); w.style.transform=`translateY(${up(d,56)}px)`; }
+    else { w.style.opacity=''; w.style.transform=''; }
+  });
+  if(shot.dotEl){
+    const d=shot.dotEl, li=shot.words.length-1;
+    d.style.color=TEST?TESTCOL[li%TESTCOL.length]:C;
+    const land= shot.entry==='end'?0.5:0.3;
+    const dl=lt-land;
+    let ds=dl<0?0: 2.4-1.4*spr(dl,24,0.45);
+    const pulse=(p)=>0.4*Math.sin(Math.PI*clamp((lt-p)/0.26));
+    if(shot.entry==='join') ds+= dl>0?pulse(0.65):0;
+    if(shot.entry==='end') ds+= pulse(2.0)+pulse(1.5)*0;
+    d.style.opacity=dl<0?0:fade(dl,0.04); d.style.transform=`scale(${ds})`;
+  }
+  // selection frame
+  if(shot.entry==='frame' && lt>0.06){
+    const r=el.getBoundingClientRect(); // measure untransformed box from layout values
+    const w=el.offsetWidth, h=el.offsetHeight, pad=26;
+    const fs=1.1-0.1*spr(lt-0.06,26,0.6);
+    frame.style.display=TEST?'none':'block';
+    frame.style.width=(w+pad*2)+'px'; frame.style.height=(h*0.9+pad*2)+'px';
+    frame.style.opacity=fade(lt-0.06,0.05);
+    frame.style.transform=`translate(${CX-(w+pad*2)/2+tx}px,${CY-(h*0.9+pad*2)/2+ty+h*0.02}px) rotate(${rotG}deg) scale(${fs})`;
+    tag.textContent= lt<0.5 ? `W ${Math.round(w)} × H ${Math.round(h*0.9)}` : 'LOCKED';
+    tag.style.transform=`scale(${lt<0.5?1:1+0.25*(1-spr(lt-0.5,26,0.5))})`;
+  }
+  // end frame events: underline closes, technical label
+  if(shot.entry==='end'){
+    const w=el.offsetWidth, h=el.offsetHeight;
+    const c=spr(lt-1.0,14,0.85);
+    if(c>0){ uline.style.display='block'; uline.style.background=TEST?'#ffffff':C; uline.dataset.g='U';
+      const W=Math.min(w,FIT)*c; uline.style.width=W+'px'; uline.style.left=(CX-W/2)+'px'; uline.style.top=(CY+h/2+38)+'px'; }
+    const dl=lt-1.5;
+    if(dl>0){ lblEnd.style.display='block'; lblEnd.style.color=TEST?'#ffffff':S; lblEnd.dataset.g='E';
+      lblEnd.style.opacity=fade(dl); lblEnd.style.left='50%'; lblEnd.style.left=(CX)+'px';
+      lblEnd.style.top=(CY+h/2+86)+'px'; lblEnd.style.transform=`translateX(-50%) translateY(${up(dl,24)}px)`; }
+  }
+}
+window.seek=seek; window.DUR=DUR; window.shots=shots;
+window.ready=(async()=>{
+  await Promise.all([document.fonts.load('900 100px NSH','אבג.'),document.fonts.load('900 100px NSH','.'),document.fonts.load('700 26px JBM','NAKITO')]);
+  await document.fonts.ready;
+  fit(); seek(0); return true;
+})();
+if(!new URLSearchParams(location.search).has('render')){
+  window.ready.then(()=>{const t0=performance.now();const loop=()=>{seek(((performance.now()-t0)/1000)%DUR);requestAnimationFrame(loop);};loop();});
+}
+</script>
+</body>
+</html>
