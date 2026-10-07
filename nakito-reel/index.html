@@ -41,7 +41,6 @@ html,body{margin:0;background:#000}
   <div id="counter">00s</div>
   <div id="cap" dir="rtl"><span class="w" id="capw"></span></div>
   <div class="lbl" id="lblL" style="left:104px;top:272px">NAKITO</div>
-  <div class="lbl" id="lblR" style="right:104px;top:272px">01/32</div>
   <svg width="0" height="0" style="position:absolute"><filter id="mb" x="-50%" y="-10%" width="200%" height="120%"><feGaussianBlur id="mbg" stdDeviation="0 0"/></filter></svg>
 </div>
 <script>
@@ -73,7 +72,7 @@ const shots=[
  {g:26,n:1,bg:S,fg:K,lines:[['מושלם.']],entry:'cut',cond:true},
  {g:27,n:5,bg:K,fg:S,lines:[['לחיצה','אחת.'],['ניקיון','מושלם']],entry:'end',dot:true},
 ];
-const SIMCAP=['לחיצה','נסגר','שטיפה','שטיפה','חיטוי','ייבוש','נפתח','מוכן.'];
+const SIMCAP=['לחיצה','סגירה','שטיפה','שטיפה','חיטוי','ייבוש','פתיחה','מוכן.'];
 const TESTCOL=['#ff0000','#00ff00','#0000ff','#ffff00','#ff00ff','#00ffff'];
 
 // ---------- closed-form springs ----------
@@ -284,8 +283,7 @@ function seek(t){
   $('cam').style.transform=`translate(${sx}px,${sy}px) rotate(${ang}deg) scale(${push})`;
   // corner labels
   const fg=shot.fg||S, dark=bgAt[gi]===K;
-  for(const id of ['lblL','lblR']){ $(id).style.color=TEST?'#ffffff':(dark?'#AEB6BE':K); $(id).style.display=shot.kind==='intro'?'none':'block'; }
-  $('lblR').textContent=String(gi+1).padStart(2,'0')+'/'+NG;
+  for(const id of ['lblL']){ $(id).style.color=TEST?'#ffffff':(dark?'#AEB6BE':K); $(id).style.display=shot.kind==='intro'?'none':'block'; }
   // reset
   for(const s of shots) if(s.el && s!==shot) s.el.style.display='none';
   frame.style.display='none'; $('uline').style.display='none'; $('logo').style.display='none';
@@ -312,12 +310,12 @@ function seek(t){
     case 'slide': { const D=980; tx=D*(1-spr(lt,17,0.9)); const v=D*dspr(lt,17,0.9);
       $('mbg').setAttribute('stdDeviation',`${Math.min(42,v/60*0.35).toFixed(2)} 0`); if(v>30&&!TEST) el.style.filter='url(#mb)';
       op=fade(lt,0.05); ty=up(lt,30); break; }
-    case 'frame': op=fade(lt); ty=up(lt); rotG=4*spr(lt-0.12,16,0.5)-4*spr(lt-0.5,18,0.55); break;
+    case 'frame': op=fade(lt); ty=up(lt); sc=1+0.06*Math.sin(Math.PI*clamp((lt-0.5)/0.22)); break;
   }
   setVar(el,wd,ls);
   el.style.opacity=op;
   el.style.transform=`translate(-50%,-50%) translate(${tx}px,${ty}px) rotate(${rotG}deg) scale(${sc})`;
-  const gpos = shot.entry==='end' ? -20+140*(((lt-0.3+1.1)%1.1)/0.5) : -20+140*clamp((lt-0.14)/0.45);
+  const gpos = shot.entry==='frame' ? (lt<0.5 ? -20+140*clamp((lt-0.14)/0.35) : -20+140*clamp((lt-0.5)/0.4)) : shot.entry==='end' ? -20+140*(((lt-0.3+1.1)%1.1)/0.5) : -20+140*clamp((lt-0.14)/0.45);
   shot.words.forEach((w,i)=>{
     if(TEST){ w.style.color=TESTCOL[i%TESTCOL.length]; w.style.backgroundImage='none'; w.style.webkitTextFillColor=''; w.style.filter='none'; }
     else paint(w,fg,gpos-i*12);
@@ -335,7 +333,7 @@ function seek(t){
     if(shot.entry==='end') ds+= pulse(2.0);
     d.style.opacity=dl<0?0:fade(dl,0.04); d.style.transform=`scale(${ds})`;
   }
-  if(shot.entry==='frame' && lt>0.06){
+  if(false){
     const w=el.offsetWidth, h=el.offsetHeight, pad=26;
     const fs=1.1-0.1*spr(lt-0.06,26,0.6);
     frame.style.display=TEST?'none':'block';
