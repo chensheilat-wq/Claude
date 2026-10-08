@@ -1,6 +1,6 @@
 # Assembles the four slides into one printable HTML page (one 1920x1080 page per slide).
 import re
-ORDER = ['cover', 'proof', 'offer', 'close']
+ORDER = ['cover', 'why', 'how', 'proof', 'offer', 'close']
 BLOBS = {'/_blob/af240f03c7ffaed6b9c9c2a36c9da1bb': 'assets/unit.png',
          '/_blob/ee6d2444e0998b128d79c50ff5f42782': 'assets/pilot.png',
          '/_blob/0c5cb596b8f9d4c05e1e73aee9edc6aa': 'assets/logo.png'}
