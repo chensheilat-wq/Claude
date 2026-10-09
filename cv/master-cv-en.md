@@ -12,7 +12,7 @@ Senior business development and operations leader with 10+ years of building and
 **ROOMS – Flexible Workspaces** | 2026 – Present
 - Lead business development for a new product line: amenity floors in office towers – conference, events, F&B, wellness and shared-service hubs for building tenants.
 - End-to-end ownership from concept to delivery: product definition, business and operating model, selection and management of operators (F&B, wellness, content).
-- Manage a ₪10M+ budget and lead project managers, designers and architects.
+- Manage a ₪10M+ budget and lead project managers and designers.
 - Report regularly to senior management and investors.
 - First project: "The Lobby" in the Allied Glilot building, serving ~5,500 tenant employees.
 - In parallel: manage the on-demand department (events, meeting rooms, day offices) across 10 sites – team, KPIs, budget vs. actual and data infrastructure (Salesforce, monday.com, Qlik).
