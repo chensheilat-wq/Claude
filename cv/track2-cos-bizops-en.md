@@ -34,7 +34,7 @@ Chief of Staff and business operations leader with 10+ years of turning strategy
 
 ### Earlier Experience
 - **Fundraising Manager**, Machane Meshutaf NGO | 2016 – 2018
-- **Artist Manager & Festival Producer** (Freelance) | 2013 – 2018 – managed artists including Mark Eliyahu, Narkis, Akiva Turgeman and Shai Maestro; produced the End of Summer Festival at the Jerusalem Theatre, Blues in Sderot and Sound Ports in Tel Aviv.
+- **Artist Manager & Festival Producer** (Freelance) | 2013 – 2018 – managed artists including Mark Eliyahu, Narkis, Akiva and Shai Maestro; produced the End of Summer Festival at the Jerusalem Theatre, Blues in Sderot and Sound Ports in Tel Aviv.
 
 ## CORE CAPABILITIES
 CEO & Executive Partnership · Strategic Initiatives & Launches · Operating Model Design · Cross-Functional Leadership · Negotiation & Contracts · Budgeting & Financial Coordination · Stakeholder & Investor Reporting · P&L Ownership

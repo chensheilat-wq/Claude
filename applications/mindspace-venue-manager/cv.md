@@ -32,7 +32,7 @@ Hospitality and events business leader with 10+ years of building, launching and
 
 ### Fundraising Manager · Machane Meshutaf NGO | 2016 – 2018
 ### Artist Manager & Cultural Producer · Freelance | 2013 – 2018
-- Managed artists including Mark Eliyahu, Narkis, Akiva Turgeman and Shai Maestro.
+- Managed artists including Mark Eliyahu, Narkis, Akiva and Shai Maestro.
 - Festival producer: End of Summer Festival at the Jerusalem Theatre, Blues in Sderot, and Sound Ports in Tel Aviv; international collaborations, audience development, marketing and production.
 
 ## CORE CAPABILITIES
