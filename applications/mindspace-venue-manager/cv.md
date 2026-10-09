@@ -28,7 +28,7 @@ Hospitality and events business leader with 10+ years of building, launching and
 
 ### Chief of Staff
 **Israel Next Generation (NGO)** | 2024 – 2026
-- Strategic partner to the CEO; led cross-organizational initiatives, budgets and contracts across 100+ staff and national campuses.
+- Strategic partner to the CEO; led cross-organizational initiatives, budgets and contracts across 100+ staff in a nationwide operation.
 
 ### Fundraising Manager · Machane Meshutaf NGO | 2016 – 2018
 ### Artist Manager & Cultural Producer · Freelance | 2013 – 2018

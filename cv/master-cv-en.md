@@ -22,7 +22,7 @@ Senior business development and operations leader with 10+ years of building and
 ### Chief of Staff
 **Israel Next Generation (NGO)** | 2024 – 2026
 - Strategic partner to the CEO and senior leadership on organizational strategy, prioritization and execution.
-- Led cross-organizational initiatives across operations, finance, partnerships and programs, coordinating 100+ staff across national campuses.
+- Led cross-organizational initiatives across operations, finance, partnerships and programs, coordinating 100+ staff in a nationwide operation.
 - Managed budgets, contracts, donor reporting and Israel–U.S. financial flows across multiple entities and funding sources.
 - Central coordination point between the CEO, board, management, donors and external partners.
 
