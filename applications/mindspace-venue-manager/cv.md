@@ -32,7 +32,8 @@ Hospitality and events business leader with 10+ years of building, launching and
 
 ### Fundraising Manager · Machane Meshutaf NGO | 2016 – 2018
 ### Artist Manager & Cultural Producer · Freelance | 2013 – 2018
-- Executive Producer of the Sound Ports Festival; international artists, production and audience development.
+- Managed artists including Mark Eliyahu, Narkis, Akiva Turgeman and Shai Maestro.
+- Festival producer: End of Summer Festival at the Jerusalem Theatre, Blues in Sderot, and Sound Ports in Tel Aviv; international collaborations, audience development, marketing and production.
 
 ## CORE CAPABILITIES
 Venue Launch & Pre-Opening · Events & Conference Operations · F&B and Operator Management · P&L & Budget Ownership · B2B Sales & Pricing · Service Standards & SOPs · Team Leadership · Data-Driven Management
@@ -40,4 +41,4 @@ Venue Launch & Pre-Opening · Events & Conference Operations · F&B and Operator
 **Tools:** Salesforce, monday.com, Book-a-Space, Qlik, Google Workspace · **Languages:** Hebrew (native), English (fluent)
 
 ## EDUCATION
-B.A. in Business Administration – The Open University of Israel
+B.A. in Business Administration – The Open University of Israel (in progress)

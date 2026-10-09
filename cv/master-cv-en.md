@@ -40,7 +40,8 @@ Senior business development and operations leader with 10+ years of building and
 
 ### Artist Manager & Cultural Producer
 **Freelance** | 2013 – 2018
-- Executive Producer of the Sound Ports Festival; led international collaborations, audience development, marketing and event production.
+- Managed artists including Mark Eliyahu, Narkis, Akiva Turgeman and Shai Maestro.
+- Festival producer: End of Summer Festival at the Jerusalem Theatre, Blues in Sderot, and Sound Ports in Tel Aviv; international collaborations, audience development, marketing and production.
 
 ## CORE CAPABILITIES
 Business Development & Partnerships · P&L and Budget Ownership · Sales Management & KPIs · Events & Hospitality Operations · Operating Model Design · Executive & CEO Partnership · Data-Driven Decision Making · Cross-Functional Leadership
@@ -49,4 +50,4 @@ Business Development & Partnerships · P&L and Budget Ownership · Sales Managem
 **Languages:** Hebrew (native), English (fluent)
 
 ## EDUCATION
-B.A. in Business Administration – The Open University of Israel
+B.A. in Business Administration – The Open University of Israel (in progress)
