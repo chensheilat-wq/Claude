@@ -18,6 +18,7 @@ Senior business development and operations leader with 10+ years of building and
 - Report regularly to senior management and investors.
 - Leading the first project: an amenity hub in an office tower serving ~5,500 tenant employees.
 - In parallel: manage the Events & Hospitality department across all the network's sites (100+ meeting rooms, event and conference halls) including managing the department team.
+- Specified and built the department's BI and CRM systems.
 
 ### Chief of Staff
 **Israel Next Generation (NGO)** | 2024 – 2026
