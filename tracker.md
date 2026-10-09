@@ -1,11 +1,31 @@
 # מעקב מועמדויות
 
+> סבב לינקדאין (שורות L1–L20) — 09.10.2026, דרך תוסף Claude בכרום: 547 מודעות (מחוז ת"א + המרכז, חודש אחרון), 50 נקראו לעומק. מספרי המועמדים כפי שמוצגים בתצוגה הציבורית.
 > סבב Indeed (שורות I1–I5) — 09.10.2026.
 > סבב 1 (שורות 1–10, CoS/BizOps) + סבב 2 (שורות A1–A6, נדל"ן/אירוח/חללי עבודה) — 09.10.2026. מקור: חיפוש רשת (אתרי המשרות חסומים בסביבה הזו). **אף משרה עדיין לא אומתה כפתוחה** — לבדוק בקישור לפני הגשה.
 
 | # | חברה | תפקיד | מיקום | סקטור | התאמה | קישור / מקור | סטטוס | צעד הבא |
 |---|------|-------|-------|-------|-------|--------------|-------|---------|
-| I1 | **morning** | Business Operations Manager – לצד ה-COO, כולל אחריות CoS (החלפת לידה עם אופציה לקביעות) | יפו | הייטק (SaaS) | **7** | [Indeed](https://to.indeed.com/aazkjryscjr9) | חבילה מוכנה – ממתין לאישור | אישור חן + הגשה |
+| L1 | **CrowdStrike** | Workplace Services Manager – משרדי ישראל: אמניטיז, הסעדה, אירועים, ספקים, בעל הנכס; מנהל/ת צוות רכזים וקבלה | ת"א (5 ימים במשרד) | הייטק / Workplace | **8** – אמניטיז+אירועים+ספקים+ניהול צוות = ROOMS ועדנה. פער: כפיפות ל-Office Manager EMEA (בכירות/שכר לבדוק), ניהול חירום | [LinkedIn](https://www.linkedin.com/jobs/view/4472171467) | חבילה מוכנה – ממתין לאישור | אישור חן + הגשה |
+| L10 | **Stealth (סייבר)** | Founding Operation Lead – Ops/BizOps/CoS בשלב 0→1, AI ואוטומציה | מחוז ת"א | הייטק (סטארטאפ) | **8** – 0→1 (עדנה), CoS, השקת קו עסקי, Claude Code. 200+ מועמדים; שכר בסטארטאפ מוקדם לבדוק | [LinkedIn](https://www.linkedin.com/jobs/view/4472906075) | חבילה מוכנה – ממתין לאישור | אישור חן + הגשה |
+| L2 | Black Rabbit | Director of Operations & Customer Experience | ת"א | תיירות-טק | 6 – בכירות מתאימה (מנכ"לית עדנה, CoS); חובה: ניהול כמה מחלקות + מפת דרכים AI; אין רקע CS/GDS | [LinkedIn](https://www.linkedin.com/jobs/view/4471282532) | נמצאה | החלטת חן |
+| L6 | Jifiti | Head of Administration (כפיפות ל-CFO) | מודיעין | פינטק | 6 – ספקים, חוזים, תקציב, אירועים; כנראה מתחת לרף השכר; מודיעין | [LinkedIn](https://www.linkedin.com/jobs/view/4467809084) | נמצאה | החלטת חן |
+| L15 | Meta | Strategic Program Manager, Global Business Group | ת"א | הייטק | 6 – כמה workstreams מול הנהלה בכירה; תחרותי מאוד, 6+ שנות ניהול תוכניות | [LinkedIn](https://www.linkedin.com/jobs/view/4476594129) | נמצאה | החלטת חן |
+| L16 | Cato Networks | Business Operations Specialist – תקציבים, ספקים, אירועים גלובליים, הנהלה בכירה | מחוז ת"א | הייטק (סייבר) | 6 – תוכן מתאים (אירועים, ספקים); הטייטל Specialist – כנראה מתחת לבכירות ולשכר. יש מכתב Cato קודם בדרייב | [LinkedIn](https://www.linkedin.com/jobs/view/4476594850) | נמצאה | החלטת חן |
+| L12 | Buildots | Business Process Manager | מחוז ת"א | קונסטרקשן-טק | 5 – 5+ שנות PMO/BizOps; פער בכלים (Salesforce, Tableau) | [LinkedIn](https://www.linkedin.com/jobs/view/4475412912) | נמצאה | לא מומלץ כרגע |
+| L18 | Wolt | SSC Operational Excellence Team Manager | ת"א | הייטק | 5 – שיפור תפעולי ו-AI; דגש Looker/Snowflake | [LinkedIn](https://www.linkedin.com/jobs/view/4471339690) | נמצאה | לא מומלץ כרגע |
+| L3 | Guesty | Director of CX Operations | ת"א | אירוח-טק | 4 – מוטה טכנולוגית (Zendesk, Billing, סוכני AI) | [LinkedIn](https://www.linkedin.com/jobs/view/4461313906) | נמצאה | לא מומלץ |
+| L7 | Kela Technologies | Office & Operations Manager | ת"א | הייטק | 4 – דרג נמוך מהיעד | [LinkedIn](https://www.linkedin.com/jobs/view/4477184368) | נמצאה | לא מומלץ |
+| L14 | Payoneer | Senior Domain Operations Lead, Business Applications | הרצליה | פינטק | 4 – מערכות עסקיות, Agile | [LinkedIn](https://www.linkedin.com/jobs/view/4466542366) | נמצאה | לא מומלץ |
+| L19 | Fiverr | Operation Manager, Content Moderation | ת"א | הייטק | 4 – Trust & Safety, SQL | [LinkedIn](https://www.linkedin.com/jobs/view/4462678342) | נמצאה | לא מומלץ |
+| L20 | Lemonade | BizOps Senior Lead | ת"א | אינשורטק | 4 – 6+ שנות ייעוץ/BizOps, אנליטיקה | [LinkedIn](https://www.linkedin.com/jobs/view/4436127060) | נמצאה | לא מומלץ |
+| L4 | W Hotels (Marriott) | Dir-Guest Services | הרצליה | מלונאות | 3 – דרג ושכר נמוכים | [LinkedIn](https://www.linkedin.com/jobs/view/4463893224) | נמצאה | לא מומלץ |
+| L13 | Buildots | Delivery Project Management TL | מחוז ת"א | קונסטרקשן-טק | 3 – 7+ שנות PM ב-SaaS | [LinkedIn](https://www.linkedin.com/jobs/view/4466266579) | נמצאה | לא מומלץ |
+| L17 | Wolt | Regional Strategy & Operations Manager, Consumer | ת"א | הייטק | 3 – תואר + אנליטיקה/SQL | [LinkedIn](https://www.linkedin.com/jobs/view/4473209867) | נמצאה | לא מומלץ |
+| L5 | בנק דיסקונט | Head of Real Estate – אגף נכסים ובינוי | ראשל"צ | בנקאות | 2 – תואר חובה, 10+ שנות ניהול בכיר בנדל"ן | [LinkedIn](https://www.linkedin.com/jobs/view/4421692251) | נמצאה | לא מומלץ |
+| L8 | Dun & Bradstreet | Sales Manager (Real Estate sector) | בני ברק | מידע עסקי | 2 – מכירות טהורות | [LinkedIn](https://www.linkedin.com/jobs/view/4466834600) | נמצאה | לא מומלץ |
+| L9 | Altneuland Group | מנהל/ת מכירות נדל"ן יזמי | הוד השרון | נדל"ן | 2 – מכירות דירות | [LinkedIn](https://www.linkedin.com/jobs/view/4476599477) | נמצאה | לא מומלץ |
+| I1 | **morning** | Business Operations Manager – לצד ה-COO, כולל אחריות CoS (החלפת לידה עם אופציה לקביעות) | יפו | הייטק (SaaS) | **7** | [Indeed](https://to.indeed.com/aazkjryscjr9) · [LinkedIn](https://www.linkedin.com/jobs/view/4475399598) (פורסם 4.10, 200+ מועמדים) | חבילה מוכנה – ממתין לאישור | אישור חן + הגשה |
 | I2 | IBI קפיטל | עוזר/ת מנכ"ל / Chief of Staff | ת"א | פיננסים | 4 – דורש תואר פיננסי (חובה) | [Indeed](https://to.indeed.com/aaw926s4dt6p) | נמצאה | לא מומלץ |
 | I3 | Medison Pharma | Senior Manager, Strategic Projects (משרד המנכ"ל) | פ"ת | פארמה | 4 – דורש 5–8 שנות ייעוץ אסטרטגי/בנקאות | [Indeed](https://to.indeed.com/aa9xk2p76y9z) | נמצאה | לא מומלץ |
 | I4 | Taboola | Strategy Manager | ת"א | הייטק | 4 – דורש רקע ייעוץ/IB ומודלים פיננסיים | [Indeed](https://to.indeed.com/aax4csltlk2z) | נמצאה (אוגוסט) | לא מומלץ |
@@ -34,5 +54,6 @@
 - BizOps ת"א: Levels.fyi חציון ~₪207K; SalaryExpert ~₪311K.
 
 ## הערות
+- **סבב לינקדאין 09.10:** נופו מוחרגות (ROOMS by Fattal, Mindspace, הפניקס, מליסרון) ומשרות עם דרישות חובה לא מתאימות (ייעוץ/IB: Moon Active, Teva, Colmobil; טכני: HUNTHEAD, Check Point, ESP710; עו"ד: ישר אדריכלים). שווה מבט: Yad2 – VP Operations & Monetization (10+ שנים, P&L), Taboola – Strategy Manager (כבר I4).
 - **Mindspace היא מתחרה ישירה של ROOMS** — פנייה בדיסקרטיות; לבדוק סעיפי אי-תחרות/סודיות בחוזה ההעסקה לפני הגשה.
 - יעדים לבדיקה ידנית (דפי קריירה לא נגישים מכאן): עזריאלי, מליסרון, גב-ים, אלוני חץ/אמות, ריט 1, WeWork, Labs.
