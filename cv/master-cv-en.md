@@ -1,22 +1,21 @@
 # CHEN SHEILAT
 Tel Aviv, Israel · +972-54-2474282 · chensheilat@gmail.com
 
-**Business Development & Operations Leader · Chief of Staff · Events & Hospitality**
+**Business Development & New Products · Operations · Events & Hospitality**
 
 ## PROFESSIONAL SUMMARY
-Senior business development and operations leader with 10+ years of building and running revenue-generating businesses alongside CEOs and executive teams. Currently leading business development and the Events & Hospitality department at ROOMS, a flexible-workspace network operating 10 sites across central Israel. Founder of a profitable ₪2M/year events venue and former Chief of Staff. Combines P&L ownership, data-driven sales management and hands-on operational execution, and thrives in ambiguous, fast-changing environments.
+Senior business development and operations leader with 10+ years of building and running revenue-generating businesses alongside CEOs and executive teams. Currently leading business development for a new product line at ROOMS – amenity floors in office towers – with a ₪10M+ budget, reporting to senior management and investors. Founder of a profitable ₪2M/year events venue and former Chief of Staff. Combines P&L ownership, data-driven sales management and hands-on operational execution, and thrives in ambiguous, fast-changing environments.
 
 ## PROFESSIONAL EXPERIENCE
 
-### Head of Business Development, Events & Hospitality
+### Head of Business Development – Building Amenity Floors
 **ROOMS – Flexible Workspaces** | 2026 – Present
-- Lead the on-demand business (events, meeting rooms, boardrooms, day offices, training rooms) across 10 sites: 100+ meeting rooms, 11 boardrooms and 12 event spaces.
-- Own the department's revenue line [₪4M+ annually – TO CONFIRM]: monthly budget-vs-actual by site, re-forecasting after wartime disruption, and a half-year sales plan to close the budget gap.
-- Manage the sales and events team; redesigned department structure, role definitions, KPIs (lead response time, conversion, retention) and incentive model.
-- Built the department's data foundation: conversion and cost-per-lead analysis by channel and product, integrating Salesforce, monday.com, Book-a-Space and Qlik BI.
-- Drove channel strategy to reduce dependence on a single lead marketplace (43% of leads), and introduced proactive sales, key-account portfolios and a 30/60/90-day retention flow.
-- Standardizing service, product, pricing, cancellation and collection policies across all sites.
-- Joined as management consultant and Chief of Staff to the CEO (Mar–Apr 2026): authored the business plan and operating model for "The Lobby", a new conference, events and hospitality hub in the Allied Glilot building, serving 5,500 tenant employees.
+- Lead business development for a new product line: amenity floors in office towers – conference, events, F&B, wellness and shared-service hubs for building tenants.
+- End-to-end ownership from concept to delivery: product definition, business and operating model, selection and management of operators (F&B, wellness, content).
+- Manage a ₪10M+ budget and lead project managers, designers and architects.
+- Report regularly to senior management and investors.
+- First project: "The Lobby" in the Allied Glilot building, serving ~5,500 tenant employees.
+- In parallel: manage the on-demand department (events, meeting rooms, day offices) across 10 sites – team, KPIs, budget vs. actual and data infrastructure (Salesforce, monday.com, Qlik).
 
 ### Chief of Staff
 **Israel Next Generation (NGO)** | 2025 – 2026 [TO CONFIRM end date]
