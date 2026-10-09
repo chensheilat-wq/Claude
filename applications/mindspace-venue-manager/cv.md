@@ -38,7 +38,7 @@ Hospitality and events business leader with 10+ years of building, launching and
 ## CORE CAPABILITIES
 Venue Launch & Pre-Opening · Events & Conference Operations · F&B and Operator Management · P&L & Budget Ownership · B2B Sales & Pricing · Service Standards & SOPs · Team Leadership · Data-Driven Management
 
-**Tools:** Claude Code, monday.com, Book-a-Space, Qlik, Google Workspace · **Languages:** Hebrew (native), English (fluent)
+**Tools:** Claude Code, monday.com, BI dashboards, Google Workspace · **Languages:** Hebrew (native), English (fluent)
 
 ## EDUCATION
 B.A. in Business Administration – The Open University of Israel (in progress)
