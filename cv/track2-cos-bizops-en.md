@@ -16,7 +16,7 @@ Chief of Staff and business operations leader with 10+ years of turning strategy
 - Lead branding and marketing for the new brand, and build all the infrastructure required for its launch.
 - Lead point of contact for, and direct, the project management firm and designers on a ₪10M+ project.
 - Report regularly to senior management and investors.
-- In parallel: manage the Events & Hospitality department across all the network's sites (100+ meeting rooms, event and conference halls).
+- In parallel: manage the Events & Hospitality department across all the network's sites (100+ meeting rooms, event and conference halls) and a team of three.
 
 ### Chief of Staff
 **Israel Next Generation (NGO)** | 2024 – 2026
