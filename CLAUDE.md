@@ -18,4 +18,5 @@
 - משרות ישנות מ-30 יום — לסמן כ"ייתכן שנסגרה".
 
 ## מקורות
-- קו"ח במאגר הדרייב של חן (תיקייה `13-en7Z8cPr3ZKlrOVUwrTQjZJoe2pUxx`). גרסת הבסיס: `Chen_Sheilat_Executive_CV.docx` (ינואר 2026).
+- קו"ח במאגר הדרייב של חן (תיקייה `13-en7Z8cPr3ZKlrOVUwrTQjZJoe2pUxx`). גרסת הבסיס המעודכנת: `cv/master-cv-en.md` (כוללת את ROOMS). מכתבי פנייה קודמים לטון: Cover Letter Taboola / Monday.com / Catonetworks.
+- חומרי ROOMS בדרייב (חסויים — לא לצטט מספרים פנימיים בלי אישור): "דו״ח מזדמנים - לקראת רבעונים 3,4 - 2026", "The Lobby - Business Plan.pdf", "הסכם מתן שירותים ROOMS".
