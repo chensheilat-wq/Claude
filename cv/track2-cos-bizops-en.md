@@ -39,7 +39,7 @@ Chief of Staff and business operations leader with 10+ years of turning strategy
 ## CORE CAPABILITIES
 CEO & Executive Partnership · Strategic Initiatives & Launches · Operating Model Design · Cross-Functional Leadership · Negotiation & Contracts · Budgeting & Financial Coordination · Stakeholder & Investor Reporting · P&L Ownership
 
-**Tools:** Salesforce, monday.com, HubSpot, Google Workspace · **Languages:** Hebrew (native), English (fluent)
+**Tools:** Claude Code, monday.com, Google Workspace · **Languages:** Hebrew (native), English (fluent)
 
 ## EDUCATION
 B.A. in Business Administration – The Open University of Israel (in progress)

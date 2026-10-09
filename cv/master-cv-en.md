@@ -46,7 +46,7 @@ Senior business development and operations leader with 10+ years of building and
 ## CORE CAPABILITIES
 Business Development & Partnerships · P&L and Budget Ownership · Sales Management & KPIs · Events & Hospitality Operations · Operating Model Design · Executive & CEO Partnership · Data-Driven Decision Making · Cross-Functional Leadership
 
-**Tools:** Salesforce, monday.com, HubSpot, Qlik, Book-a-Space, Google Workspace, workflow automation
+**Tools:** Claude Code, monday.com, Qlik, Book-a-Space, Google Workspace, workflow automation
 **Languages:** Hebrew (native), English (fluent)
 
 ## EDUCATION
