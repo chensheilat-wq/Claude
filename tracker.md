@@ -1,5 +1,6 @@
 # מעקב מועמדויות
 
+> סבב L (שורות L1–L7) — 09.10.2026 ערב. **LinkedIn חסום לגמרי בסביבה הזו** (גם גישה ישירה וגם WebFetch) — החיפוש נעשה דרך Indeed + חיפוש רשת על דפי LinkedIn/Greenhouse/Built In. כל המשרות נבדקו מול רשימת ההחרגה.
 > סבב Indeed (שורות I1–I5) — 09.10.2026.
 > סבב 1 (שורות 1–10, CoS/BizOps) + סבב 2 (שורות A1–A6, נדל"ן/אירוח/חללי עבודה) — 09.10.2026. מקור: חיפוש רשת (אתרי המשרות חסומים בסביבה הזו). **אף משרה עדיין לא אומתה כפתוחה** — לבדוק בקישור לפני הגשה.
 
@@ -16,9 +17,16 @@
 | A4 | חברת PropTech (חסוי) | מנהל/ת פיתוח עסקי ושותפויות | ת"א | נדל"ן / PropTech | 6 | [דרושים](https://www.drushim.co.il/jobs/search/%D7%9E%D7%A0%D7%94%D7%9C%20%D7%A4%D7%99%D7%AA%D7%95%D7%97%20%D7%A2%D7%A1%D7%A7%D7%99%20%D7%A0%D7%93%D7%9C%22%D7%9F/) | נמצאה | לזהות חברה |
 | A5 | חברת נדל"ן מניב (ארצית) | ניהול שיווק והשקת מרכזים חדשים | לא ברור | נדל"ן מניב | 6 | [דרושים](https://www.drushim.co.il/jobs/search/%D7%9E%D7%A0%D7%94%D7%9C%20%D7%A4%D7%99%D7%AA%D7%95%D7%97%20%D7%A2%D7%A1%D7%A7%D7%99%20%D7%A0%D7%93%D7%9C%22%D7%9F/) | נמצאה | לזהות חברה |
 | A6 | Six Senses Tel Aviv | Director of Sales & Marketing (מלון חדש) | ת"א | מלונאות | 5 | [Glassdoor](https://www.glassdoor.com/Job/tel-aviv-hotel-jobs-SRCH_IL.0,8_IC2421090_KO9,14.htm) | נמצאה | לאמת |
-| 1 | Sapiens | Chief of Staff for CEO | חולון | הייטק (תוכנה לביטוח) | 9 | [LinkedIn](https://il.linkedin.com/jobs/chief-of-staff-jobs) | נמצאה | לאמת + קו"ח מותאם |
-| 2 | Payoneer | Chief of Staff | פתח תקווה | הייטק (פינטק) | 8 | [LinkedIn](https://il.linkedin.com/jobs/chief-executive-officer-jobs) | נמצאה | לאמת |
-| 3 | Kornit Digital | CEO Chief of Staff | ראש העין | הייטק / תעשייה | 8 | [LinkedIn](https://il.linkedin.com/jobs/chief-executive-officer-jobs) | נמצאה (~חודש) | לאמת |
+| L1 | Payoneer | Business Operations Manager (זמני) – תומך/ת ב-CoS של ה-CGO | ת"א / הרצליה, היברידי | הייטק (פינטק) | 5 – רמה מתחת ליעד; דורש תואר ראשון + מודלים פיננסיים | [Indeed](https://to.indeed.com/aasq887qjhsp) | ייתכן שנסגרה (28.07) | לאמת לפני השקעה |
+| L2 | Optimove | BizOps Manager | ת"א | הייטק (SaaS) | 5 – תואר ראשון **חובה** (חן בתהליך) | [Greenhouse](https://job-boards.eu.greenhouse.io/optimove/jobs/4584755101) | ייתכן שנסגרה (פורסם פבר') | לאמת + לשאול על דרישת התואר |
+| L3 | Connecteam | Director of BizOps / BizOps Team Lead (Customer-Facing) | ת"א | הייטק (SaaS) | 5 – כנראה דורש HubSpot/CS Ops מעשי | [Connecteam careers](https://connecteam.com/careers/5836815004) | נמצאה | לאמת דרישות |
+| L4 | קבוצת אלקטרה | מנהל/ת מתחם משרדים – מתחם האלף | ת"א | נדל"ן / FM | 4 – חובה: 2–3 שנות ניהול מתחם 10,000 מ"ר + קבלת בניין מקבלן | [Indeed](https://to.indeed.com/aawfln8xlwdr) | נמצאה (28.09) | לא מומלץ |
+| L5 | Mandarin Oriental | Director of Residences | ת"א | מלונאות / נדל"ן יוקרה | 5 – זווית מותג/רישוי, לא תפעול | [Glassdoor](https://www.glassdoor.com/Job/tel-aviv-hotel-jobs-SRCH_IL.0,8_IC2421090_KO9,14.htm) | ייתכן שנסגרה (מאי) | לאמת |
+| L6 | Soho House TLV | Membership Manager | ת"א | אירוח / קהילה | 4 – ג'וניורי ביחס ליעד | [Soho House careers](https://careers.sohohouse.com/careers/4579274101) | נמצאה | לא מומלץ |
+| L7 | Proactive-Team (עמותה חסויה) | Chief of Staff לעמותה חברתית | ת"א | מגזר שלישי | 5 – מתאים לניסיון, כנראה לא עומד ברף השכר | [Indeed](https://to.indeed.com/aasvsgl8j22c) | ייתכן שנסגרה (מרץ) | להחליט עם חן |
+| 1 | Sapiens | Chief of Staff for CEO | חולון | הייטק (תוכנה לביטוח) | 9 | [LinkedIn](https://il.linkedin.com/jobs/chief-of-staff-jobs) | ⚠️ לא נמצאה מודעה (09.10 ערב) | לבדוק ידנית בלינקדאין. רקע: אחרי רכישת Advent – פיטורי ~700 והחלפת הנהלה, מנכ"ל זמני |
+| 2 | Payoneer | Chief of Staff | פתח תקווה | הייטק (פינטק) | 8 | [Viola careers](https://careers.viola-group.com/companies/payoneer/jobs/35478322-chief-of-staff) | ייתכן שנסגרה (6+ חודשים) | CoS ל-CTO, פ"ת – לאמת |
+| 3 | Kornit Digital | CEO Chief of Staff | ראש העין | הייטק / תעשייה | 8 | [LinkedIn](https://il.linkedin.com/jobs/chief-executive-officer-jobs) | ⚠️ לא נמצאה מודעה (09.10 ערב) | לבדוק ידנית בלינקדאין |
 | 4 | Majestic Systems | Chief of Staff (מדווח למנכ"ל) | לא ברור | הייטק | 8 | [Glassdoor](https://www.glassdoor.com/Job/tel-aviv-yafo-chief-of-staff-jobs-SRCH_IL.0,13_IC2421096_KO14,28.htm) | נמצאה | לאמת מיקום |
 | 5 | monday.com | Programs & Operations Manager (היברידי) | ת"א | הייטק (SaaS) | 7 | [Built In](https://builtin.com/jobs/mena/israel/operations/search/operations-manager) | נמצאה | לאמת |
 | 6 | monday.com | Chief of Staff to the CIO | ת"א | הייטק (SaaS) | 7 | [LinkedIn](https://il.linkedin.com/jobs/chief-of-staff-jobs) | נמצאה | לאמת |
@@ -35,4 +43,6 @@
 
 ## הערות
 - **Mindspace היא מתחרה ישירה של ROOMS** — פנייה בדיסקרטיות; לבדוק סעיפי אי-תחרות/סודיות בחוזה ההעסקה לפני הגשה.
-- יעדים לבדיקה ידנית (דפי קריירה לא נגישים מכאן): עזריאלי, מליסרון, גב-ים, אלוני חץ/אמות, ריט 1, WeWork, Labs.
+- יעדים לבדיקה ידנית (דפי קריירה לא נגישים מכאן): עזריאלי, אלוני חץ/אמות, ריט 1, אלקטרה נדל"ן. (מליסרון וגב-ים הוסרו – ברשימת ההחרגה; WeWork/Labs – מתחרים בהמתנה לבדיקה משפטית.)
+- רעיון למסלול 1: סטארטאפ "היפר-לוקאלי" שמחבר בין דיירי מגדלי משרדים (TheMarker, מאי 2026) – לזהות את החברה ולבדוק אם מגייסת.
+- **LinkedIn:** אין גישה מהסביבה הענן. כדי לסרוק לינקדאין באמת צריך סשן עם דפדפן מקומי (Claude in Chrome) או שחן תדביק קישורי משרות.
