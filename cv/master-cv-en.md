@@ -4,7 +4,7 @@ Tel Aviv, Israel · +972-54-2474282 · chensheilat@gmail.com
 **Business Development & New Products · Operations · Events & Hospitality**
 
 ## PROFESSIONAL SUMMARY
-Senior business development and operations leader with 10+ years of building and running revenue-generating businesses alongside CEOs and executive teams. Currently leading business development for a new product line at ROOMS – amenity floors in office towers – with a ₪10M+ budget, reporting to senior management and investors. Founder of a profitable ₪2M/year events venue and former Chief of Staff. Combines P&L ownership, data-driven sales management and hands-on operational execution, and thrives in ambiguous, fast-changing environments.
+Senior business development and operations leader with 10+ years of building and running revenue-generating businesses alongside CEOs and executive teams. Currently leading business development for a new product line at ROOMS – amenity floors in office towers – a ₪10M+ project, reporting to senior management and investors. Founder of a profitable ₪2M/year events venue and former Chief of Staff. Combines P&L ownership, data-driven sales management and hands-on operational execution, and thrives in ambiguous, fast-changing environments.
 
 ## PROFESSIONAL EXPERIENCE
 
@@ -14,7 +14,7 @@ Senior business development and operations leader with 10+ years of building and
 - End-to-end ownership from concept to delivery: product definition, business and operating model.
 - Select operators (F&B, wellness, content); lead negotiations, commercial terms and contracts with them.
 - Lead branding and marketing for the new brand, and build all the infrastructure required for its launch.
-- Manage a ₪10M+ budget and lead project managers and designers.
+- Lead point of contact for, and direct, the project management firm and designers on a ₪10M+ project.
 - Report regularly to senior management and investors.
 - Leading the first project: an amenity hub in an office tower serving ~5,500 tenant employees.
 - In parallel: manage the on-demand department (events, meeting rooms, day offices) across 10 sites – team, KPIs, budget vs. actual and data infrastructure (Salesforce, monday.com, Qlik).
