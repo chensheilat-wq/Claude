@@ -1,9 +1,15 @@
 # מעקב מועמדויות
 
+> סבב Indeed (שורות I1–I5) — 09.10.2026.
 > סבב 1 (שורות 1–10, CoS/BizOps) + סבב 2 (שורות A1–A6, נדל"ן/אירוח/חללי עבודה) — 09.10.2026. מקור: חיפוש רשת (אתרי המשרות חסומים בסביבה הזו). **אף משרה עדיין לא אומתה כפתוחה** — לבדוק בקישור לפני הגשה.
 
 | # | חברה | תפקיד | מיקום | סקטור | התאמה | קישור / מקור | סטטוס | צעד הבא |
 |---|------|-------|-------|-------|-------|--------------|-------|---------|
+| I1 | **morning** | Business Operations Manager – לצד ה-COO, כולל אחריות CoS (החלפת לידה עם אופציה לקביעות) | יפו | הייטק (SaaS) | **7** | [Indeed](https://to.indeed.com/aazkjryscjr9) | חבילה מוכנה – ממתין לאישור | אישור חן + הגשה |
+| I2 | IBI קפיטל | עוזר/ת מנכ"ל / Chief of Staff | ת"א | פיננסים | 4 – דורש תואר פיננסי (חובה) | [Indeed](https://to.indeed.com/aaw926s4dt6p) | נמצאה | לא מומלץ |
+| I3 | Medison Pharma | Senior Manager, Strategic Projects (משרד המנכ"ל) | פ"ת | פארמה | 4 – דורש 5–8 שנות ייעוץ אסטרטגי/בנקאות | [Indeed](https://to.indeed.com/aa9xk2p76y9z) | נמצאה | לא מומלץ |
+| I4 | Taboola | Strategy Manager | ת"א | הייטק | 4 – דורש רקע ייעוץ/IB ומודלים פיננסיים | [Indeed](https://to.indeed.com/aax4csltlk2z) | נמצאה (אוגוסט) | לא מומלץ |
+| I5 | HP | Senior Strategy Manager | נס ציונה | הייטק | 2 – דורש 7–12 שנות ייעוץ | [Indeed](https://to.indeed.com/aa4fqwbq8l7k) | נמצאה | לא מומלץ |
 | A1 | **Mindspace** | Venue Manager – Events: הקמה וניהול מתחם כנסים ואירועים (כנראה Mindspace Beyond, גבעתיים, 5,000 מ"ר, עד 1,000 משתתפים, פתיחה 2027) | ת"א / ר"ג | חללי עבודה / אירוח | **10** | [Secret Tel Aviv Jobs](https://jobs.secrettelaviv.com/company/mindspace/) · [ynet](https://www.ynetnews.com/real-estate/article/bja7xpzwbg) | ⛔ בהמתנה – מתחרה (אי-תחרות) | בדיקה משפטית |
 | A2 | **Mindspace** | Managing Director, Israel (יחידה עסקית מלאה: P&L, תפעול, חוויית לקוח) | ת"א | חללי עבודה | 7 (stretch) | [Mindspace careers](https://www.mindspace.me/careers/tel-aviv/managing-director-israel/68.E60/) | ⛔ בהמתנה – מתחרה (אי-תחרות) | בדיקה משפטית |
 | A3 | **Mindspace** | Senior Director Commercial | ת"א | חללי עבודה | 7 | [Dreamwork](https://www.dreamworkhq.com/job/07bef9c2-b189-412b-be6a-e928d72fe827) | ⛔ בהמתנה – מתחרה (אי-תחרות) | בדיקה משפטית |
