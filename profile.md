@@ -4,7 +4,8 @@
 
 ## יעדים
 - **תפקידים:** Chief of Staff, BizOps / Business Operations, Operations Manager, Program Manager
-  - _טייטלים נוספים: ממתין לצילום מסך מחן_
+  - **ניהול יחידה עסקית (stretch):** General Manager (GM), Head of Business Unit, Business Unit Director, Business Unit Executive, VP of Business Unit, Chief Business Officer (CBO)
+  - הערה: טייטלים בכירים אלה ריאליים בעיקר בחברות קטנות-בינוניות, נדל"ן, תרבות/פנאי ואירועים — שם ה-P&L וניהול העסק (עדנה יפו) הם יתרון ישיר.
 - **סקטורים:** הייטק / סטארטאפים · תאגידים / מגזר ציבורי · חברות נדל"ן
 - **מיקום:** תל אביב והמרכז, היברידי
 - **שכר / בכירות:** _לא הוגדר עדיין_
