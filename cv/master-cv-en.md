@@ -17,7 +17,7 @@ Senior business development and operations leader with 10+ years of building and
 - Lead point of contact for, and direct, the project management firm and designers on a ₪10M+ project.
 - Report regularly to senior management and investors.
 - Leading the first project: an amenity hub in an office tower serving ~5,500 tenant employees.
-- In parallel: manage the Events & Hospitality department across all the network's sites (100+ meeting rooms, event and conference halls) and a team of three.
+- In parallel: manage the Events & Hospitality department across all the network's sites (100+ meeting rooms, event and conference halls) including managing the department team.
 
 ### Chief of Staff
 **Israel Next Generation (NGO)** | 2024 – 2026
@@ -30,7 +30,7 @@ Senior business development and operations leader with 10+ years of building and
 **Edna Jaffa – Cultural Venue, Workshops & Events Space** | 2019 – 2025
 - Built a property from scratch: a 600 m² multi-use venue in Tel Aviv – initial fundraising, planning and design, licensing, infrastructure and procurement.
 - Built a brand from scratch: created the Edna brand, identity, culture and reputation, growing it into a profitable business, successfully sold in 2025.
-- Full P&L ownership of ~₪2M annual turnover; led a team of 15, plus vendors and collaborators.
+- Full P&L ownership of ~₪2M annual turnover; responsible for a team of 10+, plus vendors and collaborators.
 - Owned business development, B2B partnerships, pricing, contracts, marketing, sales, CRM and data. Clients included leading tech companies.
 - Led the business through COVID, maintaining engagement and financial viability.
 

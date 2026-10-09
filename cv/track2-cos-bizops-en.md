@@ -16,7 +16,7 @@ Chief of Staff and business operations leader with 10+ years of turning strategy
 - Lead branding and marketing for the new brand, and build all the infrastructure required for its launch.
 - Lead point of contact for, and direct, the project management firm and designers on a ₪10M+ project.
 - Report regularly to senior management and investors.
-- In parallel: manage the Events & Hospitality department across all the network's sites (100+ meeting rooms, event and conference halls) and a team of three.
+- In parallel: manage the Events & Hospitality department across all the network's sites (100+ meeting rooms, event and conference halls) including managing the department team.
 
 ### Chief of Staff
 **Israel Next Generation (NGO)** | 2024 – 2026
@@ -28,7 +28,7 @@ Chief of Staff and business operations leader with 10+ years of turning strategy
 ### Founder & CEO
 **Edna Jaffa – Events, Workshops & Culture Venue** | 2019 – 2025
 - Built a property and a brand from scratch: a 600 m² multi-use venue in Tel Aviv – initial fundraising, design, licensing, infrastructure and procurement.
-- Grew it into a profitable business with ~₪2M annual turnover and a team of 15; successfully sold in 2025.
+- Grew it into a profitable business with ~₪2M annual turnover and a team of 10+; successfully sold in 2025.
 - Full P&L ownership: business development, B2B partnerships, pricing, contracts, marketing, sales and CRM. Clients included leading tech companies.
 - Led the business through COVID, maintaining engagement and financial viability.
 
