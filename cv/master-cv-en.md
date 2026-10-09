@@ -28,7 +28,8 @@ Senior business development and operations leader with 10+ years of building and
 
 ### Founder & CEO
 **Edna Jaffa – Cultural Venue, Workshops & Events Space** | 2019 – 2025
-- Founded and led a 600 m² multi-use cultural, business-events and community venue in Tel Aviv, from build-out to a profitable business; successfully sold in 2025.
+- Built a property from scratch: a 600 m² multi-use venue in Tel Aviv – initial fundraising, planning and design, licensing, infrastructure and procurement.
+- Built a brand from scratch: created the Edna brand, identity, culture and reputation, growing it into a profitable business, successfully sold in 2025.
 - Full P&L ownership of ~₪2M annual turnover; led a team of 15, plus vendors and collaborators.
 - Owned business development, B2B partnerships, pricing, contracts, marketing, sales, CRM and data. Clients included leading tech companies.
 - Led the business through COVID, maintaining engagement and financial viability.

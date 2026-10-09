@@ -20,8 +20,8 @@ Hospitality and events business leader with 10+ years of building, launching and
 
 ### Founder & CEO
 **Edna Jaffa – Events Venue, Workshops & Café** | 2019 – 2025
-- Built a 600 m² multi-use events and community venue in central Tel Aviv from scratch: design, licensing, infrastructure, AV and procurement.
-- Ran it as a profitable business with ~₪2M annual turnover and a team of 15; successfully sold in 2025.
+- Built a property from scratch: a 600 m² multi-use events venue in central Tel Aviv – initial fundraising, planning and design, licensing, infrastructure, AV and procurement.
+- Built a brand from scratch: created the Edna brand, identity and reputation, growing it into a profitable business with ~₪2M annual turnover and a team of 15; successfully sold in 2025.
 - Hosted corporate events, conferences, workshops and cultural events; clients included leading tech companies.
 - Full P&L ownership: pricing, B2B sales, partnerships, catering and vendor contracts, marketing, CRM and data.
 - Led the venue through COVID while maintaining financial viability.
