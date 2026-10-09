@@ -35,3 +35,8 @@ ROOMS שייכת לקבוצת פתאל, ונמצאת בתהליך מיזוג ע�
 
 ## גרסאות קו"ח קיימות בדרייב
 Executive (CoS) · Customer Success (monday.com) · Taboola · SolarEdge (Operations) · EMEA (Project Leader) · PA (Enterprise sales)
+
+## קורות חיים
+- כל העובדות ב-`cv/` אושרו ע"י חן (09.10.2026).
+- מסלול 1 (נדל"ן/אירוח/אמניטיז): `cv/track1-realestate-hospitality-he.md`
+- מסלול 2 (CoS/BizOps הייטק): `cv/track2-cos-bizops-en.md`
