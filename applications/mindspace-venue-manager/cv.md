@@ -12,7 +12,8 @@ Hospitality and events business leader with 10+ years of building, launching and
 **ROOMS – Flexible Workspaces** | Apr 2026 – Present
 - Lead a new product line from concept to launch: amenity floors in office towers, including conference halls, event spaces, F&B and wellness services for building tenants and external clients.
 - Built the business and operating model for the first hub, serving ~5,500 tenant employees: space program, revenue streams (conferences, corporate events, offsites, F&B, wellness), pricing and staffing.
-- Select and manage operators (F&B, catering, wellness, content); manage a ₪10M+ budget, project managers and designers.
+- Select operators (F&B, catering, wellness, content); lead negotiations, commercial terms and contracts with them.
+- Lead branding and marketing for the new brand and build all launch infrastructure; manage a ₪10M+ budget, project managers and designers.
 - Report to senior management and investors.
 - Manage the on-demand department across 10 sites (100+ meeting rooms, 11 boardrooms, 12 event spaces): sales and events team, KPIs, budget vs. actual, CRM and BI (Salesforce, monday.com, Qlik).
 - Standardizing event-production procedures, service, equipment kits, pricing and cancellation policies across all sites.
