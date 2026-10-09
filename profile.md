@@ -40,5 +40,5 @@ Executive (CoS) · Customer Success (monday.com) · Taboola · SolarEdge (Operat
 
 ## קורות חיים
 - כל העובדות ב-`cv/` אושרו ע"י חן (09.10.2026).
-- מסלול 1 (נדל"ן/אירוח/אמניטיז): `cv/track1-realestate-hospitality-he.md`
+- מסלול 1 (נדל"ן/אירוח/אמניטיז): `cv/track1-realestate-hospitality-he.md` + אנגלית `cv/track1-realestate-hospitality-en.md`
 - מסלול 2 (CoS/BizOps הייטק): `cv/track2-cos-bizops-en.md`

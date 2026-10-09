@@ -25,7 +25,7 @@ body { font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; font-si
 h1 { font-size: 22pt; letter-spacing: .5px; margin: 0 0 2px; color: #14213d; }
 .contact { color: #555; margin: 0 0 4px; }
 .headline { font-weight: bold; color: #b5651d; margin: 0 0 10px; font-size: 10.5pt; }
-h2 { font-size: 10.5pt; text-transform: uppercase; letter-spacing: 1px; color: #14213d;
+h2 { break-after: avoid;  font-size: 10.5pt; text-transform: uppercase; letter-spacing: 1px; color: #14213d;
      border-bottom: 1.5px solid #b5651d; padding-bottom: 2px; margin: 10px 0 5px; }
 h3 { font-size: 10.5pt; margin: 7px 0 0; color: #14213d; }
 p { margin: 0 0 4px; }
