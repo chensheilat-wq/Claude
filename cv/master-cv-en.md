@@ -17,7 +17,7 @@ Senior business development and operations leader with 10+ years of building and
 - Lead point of contact for, and direct, the project management firm and designers on a ₪10M+ project.
 - Report regularly to senior management and investors.
 - Leading the first project: an amenity hub in an office tower serving ~5,500 tenant employees.
-- In parallel: manage the on-demand department (events, meeting rooms, day offices) across 10 sites – team, KPIs, budget vs. actual and data infrastructure (Salesforce, monday.com, Qlik).
+- In parallel: manage the Events & Hospitality department across all the network's sites (100+ meeting rooms, event and conference halls).
 
 ### Chief of Staff
 **Israel Next Generation (NGO)** | 2024 – 2026

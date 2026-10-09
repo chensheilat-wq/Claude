@@ -16,8 +16,7 @@ Hospitality and events business leader with 10+ years of building, launching and
 - Lead branding and marketing for the new brand and build all launch infrastructure.
 - Lead point of contact for, and direct, the project management firm and designers on a ₪10M+ project.
 - Report to senior management and investors.
-- Manage the on-demand department across 10 sites (100+ meeting rooms, 11 boardrooms, 12 event spaces): sales and events team, KPIs, budget vs. actual, CRM and BI (Salesforce, monday.com, Qlik).
-- Standardizing event-production procedures, service, equipment kits, pricing and cancellation policies across all sites.
+- In parallel: manage the Events & Hospitality department across all the network's sites (100+ meeting rooms, event and conference halls).
 
 ### Founder & CEO
 **Edna Jaffa – Events Venue, Workshops & Café** | 2019 – 2025
